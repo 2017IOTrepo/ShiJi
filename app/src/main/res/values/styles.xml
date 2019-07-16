@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/sev</item>
+        <item name="colorPrimaryDark">@color/egi</item>
+        <item name="colorAccent">@color/four</item>
+    </style>
+
+
+    <style name="CustomTheme" parent="MaterialDrawerTheme">
+        <item name="colorPrimary">@color/sev</item>
+        <item name="colorPrimaryDark">@color/egi</item>
+        <item name="colorAccent">@color/four</item>
+        <item name="material_drawer_background">@color/side</item>
+        <item name="material_drawer_primary_text">@color/material_drawer_primary_text</item>
+        <item name="material_drawer_selected_text">@color/material_drawer_selected_text</item>
+        <item name="material_drawer_selected">@color/material_drawer_selected</item>
+
+
+
+
+
+    </style>
+
+</resources>

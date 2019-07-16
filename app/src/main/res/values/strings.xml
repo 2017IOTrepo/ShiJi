@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">史迹</string>
+    <string name="todo">TODO</string>
+    <string name="side_set">设置</string>
+    <string name="side_user">个人中心</string>
+    <string name="side_update">检查更新</string>
+    <string name="side_star">收藏</string>
+    <string name="side_about">关于</string>
+</resources>

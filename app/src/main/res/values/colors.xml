@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!--一套配色-->
+    <color name="one">#C7D9DD</color>
+    <color name="two">#FCFAFB</color>
+    <color name="three">#FEDEDD</color>
+    <color name="four">#148395</color>
+
+    <!--第二-->
+    <color name="five">#A7D7C4</color>
+    <color name="six">#AEC9CB</color>
+
+    <color name="sev">#6998A2</color>
+    <color name="egi">#4D7285</color>
+    <color name="black">#080707</color>
+    <color name="side">#586a78</color>
+
+
+</resources>
