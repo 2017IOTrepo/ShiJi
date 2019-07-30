@@ -17,6 +17,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp">
+
         <TextView
             android:id="@+id/tv_title_web"
             android:layout_width="wrap_content"
@@ -27,8 +28,9 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:singleLine="true"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:text="史迹"/>
 
     </android.support.v7.widget.Toolbar>
 

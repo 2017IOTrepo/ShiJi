@@ -20,7 +20,10 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/"
+                url "https://jitpack.io"
+
+        }
     }
     tasks.withType(Javadoc) {
         options.encoding = "UTF-8"

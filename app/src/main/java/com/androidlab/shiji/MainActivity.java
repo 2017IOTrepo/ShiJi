@@ -2,8 +2,6 @@ package com.androidlab.shiji;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +9,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.androidlab.shiji.ui.adapter.MyViewPagerAdapter;
+import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -75,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR | MaterialMode.HIDE_TEXT)//这里可以设置样式模式，总共可以组合出4种效果
                 .build();
 
-        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager(), mNavigationController.getItemCount()));
+        viewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), mNavigationController.getItemCount()));
 
         // 自动适配ViewPager页面切换
         mNavigationController.setupWithViewPager(viewPager);
@@ -95,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("asd", "onRepeat selected: " + index);
             }
         });
-
-
-
-
 
         //侧滑栏
         final IProfile profile = new ProfileDrawerItem().withName("史迹").withEmail("https://github.com/DreamMemory001").withIcon(R.drawable.touxiang);
@@ -123,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 .withDrawerWidthDp(72)
                 .withGenerateMiniDrawer(true)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
+                .withScrollToTopAfterClick(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.side_user).withDescription("查看个人信息").withIcon(MaterialDesignIconic.Icon.gmi_car).withIdentifier(1),
                         new PrimaryDrawerItem().withName(R.string.side_set).withIcon(MaterialDesignIconic.Icon.gmi_directions_run).withIdentifier(2),

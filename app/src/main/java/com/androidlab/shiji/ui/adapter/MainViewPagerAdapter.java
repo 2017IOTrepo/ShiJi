@@ -11,11 +11,11 @@ import com.androidlab.shiji.fragment_tab.Fragment3;
 import com.androidlab.shiji.fragment_tab.Fragment4;
 
 
-public class MyViewPagerAdapter extends FragmentPagerAdapter {
+public class MainViewPagerAdapter extends FragmentPagerAdapter {
 
     private int size;
 
-    public MyViewPagerAdapter(FragmentManager fm, int size) {
+    public MainViewPagerAdapter(FragmentManager fm, int size) {
         super(fm);
         this.size = size;
     }
