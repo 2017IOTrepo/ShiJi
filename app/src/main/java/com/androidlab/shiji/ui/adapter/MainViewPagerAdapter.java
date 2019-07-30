@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.androidlab.shiji.fragment_tab.Fragment1;
 import com.androidlab.shiji.fragment_tab.Fragment2;
 import com.androidlab.shiji.fragment_tab.Fragment3;
-import com.androidlab.shiji.fragment_tab.Fragment4;
 
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
@@ -29,8 +28,8 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
                 return Fragment2.newInstance();
             case 2:
                 return Fragment3.newInstance();
-            case 3:
-                return Fragment4.newInstance();
+//            case 3:
+//                return Fragment4.newInstance();
             default:
                 return  null;
         }

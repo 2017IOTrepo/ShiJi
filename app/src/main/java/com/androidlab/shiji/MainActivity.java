@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mNavigationController = pageBottomTabLayout.material()
-                .addItem(R.drawable.ic_ondemand_video_black_24dp, "Movies & TV", testColors[0])
-                .addItem(R.drawable.ic_audiotrack_black_24dp, "Music", testColors[1])
-                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
-                .addItem(R.drawable.ic_news_black_24dp, "Newsstand", testColors[3])
+                .addItem(R.drawable.search, "搜索", testColors[0])
+                .addItem(R.drawable.map1, "地图", testColors[1])
+//                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
+                .addItem(R.drawable.kepu, "科普", testColors[2])
                 .setDefaultColor(0x89FFFFFF)//未选中状态的颜色
                 .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR | MaterialMode.HIDE_TEXT)//这里可以设置样式模式，总共可以组合出4种效果
                 .build();
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         mNavigationController.setupWithViewPager(viewPager);
         //设置消息圆点
 //        mNavigationController.setMessageNumber(0,1);
-        mNavigationController.setHasMessage(3,true);
+        mNavigationController.setHasMessage(2,true);
 
         // 也可以设置Item选中事件的监听
         mNavigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("asd", "onRepeat selected: " + index);
             }
         });
+
 
         //侧滑栏
         final IProfile profile = new ProfileDrawerItem().withName("史迹").withEmail("https://github.com/DreamMemory001").withIcon(R.drawable.touxiang);
