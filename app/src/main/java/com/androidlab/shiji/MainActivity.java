@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mNavigationController = pageBottomTabLayout.material()
-                .addItem(R.drawable.search, "搜索", testColors[0])
+                .addItem(R.drawable.ser, "搜索", testColors[0])
                 .addItem(R.drawable.map1, "地图", testColors[1])
 //                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
-                .addItem(R.drawable.kepu, "科普", testColors[2])
+                .addItem(R.drawable.kepu, "科普", testColors[3])
                 .setDefaultColor(0x89FFFFFF)//未选中状态的颜色
                 .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR | MaterialMode.HIDE_TEXT)//这里可以设置样式模式，总共可以组合出4种效果
                 .build();

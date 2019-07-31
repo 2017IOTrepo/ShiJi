@@ -22,6 +22,7 @@
 
 
     <color name="pager">#FC704F</color>
+    <color name="light_gray_2">#a4b5d7</color>
 
     <color name="material_drawer_primary">#2196F3</color>
     <color name="material_drawer_primary_dark">#1976D2</color>

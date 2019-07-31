@@ -4,11 +4,7 @@
     android:layout_height="match_parent">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffcc6f"
-        android:contentDescription="@string/todo"/>
+
     <TextView
         android:layout_width="500dp"
         android:layout_height="500dp"

@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.androidlab.shiji.fragment_tab.Fragment1;
+import com.androidlab.shiji.fragment_tab.Fragment_Search;
 import com.androidlab.shiji.fragment_tab.Fragment2;
-import com.androidlab.shiji.fragment_tab.Fragment3;
+import com.androidlab.shiji.fragment_tab.Fragment_Popular_Science;
 
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
@@ -23,11 +23,11 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return Fragment1.newInstance();
+                return Fragment_Search.newInstance();
             case 1:
                 return Fragment2.newInstance();
             case 2:
-                return Fragment3.newInstance();
+                return Fragment_Popular_Science.newInstance();
 //            case 3:
 //                return Fragment4.newInstance();
             default:

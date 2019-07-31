@@ -11,12 +11,12 @@ import android.view.WindowManager;
 
 import com.androidlab.shiji.R;
 
-public class Fragment3 extends Fragment {
+public class Fragment_Popular_Science extends Fragment {
 
     private View view;
-    public static Fragment3 newInstance() {
+    public static Fragment_Popular_Science newInstance() {
         Bundle args = new Bundle();
-        Fragment3 fragment = new Fragment3();
+        Fragment_Popular_Science fragment = new Fragment_Popular_Science();
         fragment.setArguments(args);
         return fragment;
     }
