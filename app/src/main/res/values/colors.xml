@@ -28,6 +28,8 @@
     <color name="material_drawer_primary_dark">#1976D2</color>
     <color name="material_drawer_background">#586a78</color>
     <color name="material_drawer_primary_icon">#fff</color>
+    
+    <color name="characters">#090909</color>
 
 
 

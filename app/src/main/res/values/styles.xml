@@ -22,9 +22,25 @@
 
 
 
+    </style>
+
+    <style name="aboutTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/transparent</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+
+    </style>
 
 
 
+    <style name="Toolbar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@color/transparent</item>
     </style>
 
 </resources>

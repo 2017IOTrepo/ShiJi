@@ -22,6 +22,10 @@
         <activity android:name=".activity.Search_Intent_Activity">
 
         </activity>
+        <activity android:name=".activity.popular_science.Sci_Hostiory"
+            android:theme="@style/aboutTheme">
+
+        </activity>
     </application>
 
 </manifest>

@@ -5,7 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:background="@drawable/f3back">
-    
+
+
+
+
+
    <android.support.v7.widget.CardView
        android:id="@+id/carview1"
        android:layout_width="120dp"
@@ -13,7 +17,7 @@
        android:clickable="true"
        android:foreground="?android:attr/selectableItemBackground"
        app:cardCornerRadius="5dp"
-       app:cardElevation="0px"
+       app:cardElevation="3px"
        app:cardUseCompatPadding="false"
        android:layout_margin="10dp"
        app:cardBackgroundColor="@android:color/transparent">
@@ -45,6 +49,9 @@
    </android.support.v7.widget.CardView>
 
 
+
+
+
     <ImageView
         android:layout_width="220dp"
         android:layout_height="100dp"
@@ -60,7 +67,7 @@
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="5dp"
-        app:cardElevation="0px"
+        app:cardElevation="3px"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -107,7 +114,7 @@
         android:clickable="true"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="5dp"
-        app:cardElevation="0px"
+        app:cardElevation="3px"
         card_view:cardBackgroundColor="@android:color/transparent"
         android:foreground="?android:attr/selectableItemBackground">
 
