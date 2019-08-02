@@ -26,6 +26,10 @@
             android:theme="@style/aboutTheme">
 
         </activity>
+        
+      <activity android:name=".activity.Search_Item_Activity">
+
+      </activity>
     </application>
 
 </manifest>
