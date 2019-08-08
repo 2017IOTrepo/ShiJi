@@ -28,9 +28,9 @@ public class Search_Item_Activity extends AppCompatActivity{
 
         NavigationController navigationController = tab.custom()
 
-                .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"Favorites"))
-                .addItem(newRoundItem(R.drawable.ic_nearby_gray_24dp,R.drawable.ic_nearby_teal_24dp,"Nearby"))
-                .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"Favorites"))
+                .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"词向量"))
+                .addItem(newRoundItem(R.drawable.ic_nearby_gray_24dp,R.drawable.ic_nearby_teal_24dp,"地图"))
+                .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"古籍分布"))
                 .build();
 
         ViewPager viewPager = findViewById(R.id.viewPager);

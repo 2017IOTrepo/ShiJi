@@ -28,7 +28,7 @@ import java.util.List;
 public class Search_Intent_Activity extends AppCompatActivity {
 
     private SearchLayout searchLayout;
-    private Button mYuYinButton;
+
     private EditText search_edit;
     //private RecognizerDialog iatDialog;
 
@@ -39,13 +39,12 @@ public class Search_Intent_Activity extends AppCompatActivity {
         searchLayout = findViewById(R.id.searchlayout);
         search_edit = findViewById(R.id.et_searchtext_search);
 
-        //添加返回按钮
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle( "搜索" );
-        }
+
+        ActionBar mActionBar=getSupportActionBar();
+        mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setTitle("搜索");
+
         initData();
     }
 
@@ -113,13 +112,9 @@ public class Search_Intent_Activity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
-
 
 }

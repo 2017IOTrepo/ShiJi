@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Search_Intent_Activity">
+        <activity android:name=".activity.Search_Intent_Activity"
+            android:theme="@style/Search_Intent">
 
         </activity>
         <activity android:name=".activity.popular_science.Sci_Hostiory"
@@ -28,6 +29,10 @@
         </activity>
         
       <activity android:name=".activity.Search_Item_Activity">
+      </activity>
+
+      <activity android:name=".activity.popular_science.Sci_Dy"
+          android:theme="@style/AppTheme.NoActionBar">
 
       </activity>
     </application>
