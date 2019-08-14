@@ -75,6 +75,7 @@
 
 
         <ImageView
+            android:id="@+id/iv2"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:src="@drawable/book"

@@ -77,7 +77,7 @@ public class Fragment_Search extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshLaws();
+                refreshNews();
             }
         } );
 
@@ -130,7 +130,7 @@ public class Fragment_Search extends Fragment {
         }
     }
 
-    private void refreshLaws(){
+    private void refreshNews(){
         new Thread( new Runnable() {
             @Override
             public void run() {

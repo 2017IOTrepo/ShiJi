@@ -35,6 +35,10 @@
           android:theme="@style/AppTheme.NoActionBar">
 
       </activity>
+
+        <activity android:name=".activity.popular_science.Sci_Book">
+
+        </activity>
     </application>
 
 </manifest>

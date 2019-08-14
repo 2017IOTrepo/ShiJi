@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.activity.popular_science.Sci_Dy;
 import com.androidlab.shiji.activity.popular_science.Sci_Hostiory;
+import com.androidlab.shiji.activity.popular_science.Sci_Book;
 
 public class Fragment_Popular_Science extends Fragment {
 
@@ -51,6 +52,16 @@ public class Fragment_Popular_Science extends Fragment {
                                        startActivity(i);
                                    }
                                });
+
+
+        iv2  =view.findViewById(R.id.iv2);
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), Sci_Book.class);
+                startActivity(i);
+            }
+        });
 
 
         iv3 = view.findViewById(R.id.iv3);
