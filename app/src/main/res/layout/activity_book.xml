@@ -22,7 +22,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="70dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="21dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardCornerRadius="5dp"
@@ -147,6 +147,17 @@
 
     </RelativeLayout>
 
+
+
+    <View
+        android:layout_width="330dp"
+        android:layout_height="1dp"
+        android:background="@color/egi"
+        android:layout_below="@+id/classify"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"/>
+
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_marginTop="15dp"
         android:layout_below="@+id/classify"
@@ -155,8 +166,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_book"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
       >

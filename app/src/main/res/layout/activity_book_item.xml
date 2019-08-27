@@ -3,16 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="15dp">
+    android:padding="10dp">
 
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_book"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="150dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="5dp"
@@ -27,12 +26,12 @@
 
         <TextView
             android:id="@+id/tv_tag"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="20dp"
-            android:layout_margin="5dp"
+            android:layout_margin="13dp"
             android:background="#6d0d0d0d"
             android:textColor="@color/white"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:layout_gravity="start"
             android:gravity="center_horizontal"
             android:textStyle="bold"
@@ -44,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="史记"
             android:layout_marginLeft="150dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             />
@@ -53,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="司马迁"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:layout_marginLeft="150dp"
             android:layout_marginTop="50dp"/>
 
@@ -64,7 +63,7 @@
             android:text="中国历史上第一部纪传体通史"
             android:layout_marginTop="90dp"
             android:layout_marginLeft="150dp"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/black"
             />
 

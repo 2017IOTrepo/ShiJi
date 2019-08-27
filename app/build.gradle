@@ -57,5 +57,8 @@ dependencies {
 
     // recyclerview
     implementation 'com.etsy.android.grid:library:1.0.5'
+    //  文本浏览器
+    implementation 'com.github.bifan-wei:HwTxtReader:V2.1.1'
+
 
 }
