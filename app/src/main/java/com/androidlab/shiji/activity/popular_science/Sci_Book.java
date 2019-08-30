@@ -1,9 +1,11 @@
 package com.androidlab.shiji.activity.popular_science;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -14,12 +16,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.bean.Sci_Book_Show;
 import com.androidlab.shiji.ui.adapter.Book_RecyclerViewAdapater;
 import com.bifan.txtreaderlib.ui.HwTxtPlayActivity;
+import com.victor.loading.book.BookLoading;
 
 
 import java.io.File;
@@ -38,8 +42,11 @@ public class Sci_Book extends AppCompatActivity {
     private List<Sci_Book_Show> list = new ArrayList<>();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private Book_RecyclerViewAdapater adapater;
+    private ProgressBar progressBar;
 
     private String FilePath = Environment.getExternalStorageDirectory() + "/a/";
+
+    private LinearLayout itemdetail;
 
 
     private boolean flag = true;
@@ -48,9 +55,9 @@ public class Sci_Book extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
         recyclerView = findViewById(R.id.rc_book);
+        progressBar = findViewById(R.id.progress_bar);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-
         initBook();
         adapater = new Book_RecyclerViewAdapater(list, this);
         recyclerView.setHasFixedSize(true);
@@ -58,25 +65,30 @@ public class Sci_Book extends AppCompatActivity {
         recyclerView.setAdapter(adapater);
 
 
-        recyclerView.post(new Runnable() {
+        adapater.setOnclick(new Book_RecyclerViewAdapater.ClickInterface() {
             @Override
-            public void run() {
-                adapater.setOnclick(new Book_RecyclerViewAdapater.ClickInterface() {
+            public void onItemClick(final View view, final int position) {
+                Log.e("DoitemClick", "onItemClick: " );
+                final String BookName = list.get(position).getBook_Title();
+                createFolder();
+                CopyAssets();
+                // 使用Handler进行延时  并返回主线程
+
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
                     @Override
-                    public void onItemClick(View view, int position) {
-                        String BookName = list.get(position).getBook_Title();
-//                    createFolder();
-//                    CopyAssets();
-//                    Log.e("File do", "onCreate: do file " );
-//                    HwTxtPlayActivity.loadTxtFile(view.getContext(),FilePath+BookName+".txt");//传递一个文件路径
-//                    Log.e("book555555", "onItemClick: "+BookName );
-//                    flag = false;
+                    public void run() {
+                        progressBar.setVisibility(View.GONE);
+                        HwTxtPlayActivity.loadTxtFile(view.getContext(),FilePath+BookName+".txt");//传递一个文件路径
                         Toast.makeText(Sci_Book.this, BookName, Toast.LENGTH_SHORT).show();
                     }
-                });
+                },2000);
+
+
+
+
             }
         });
-
 
         mSwipeRefreshLayout = findViewById( R.id.swipe_refresh );
         mSwipeRefreshLayout.setColorSchemeResources( R.color.egi );
@@ -84,7 +96,6 @@ public class Sci_Book extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 refreshBooks();
-
             }
         } );
 
@@ -95,6 +106,7 @@ public class Sci_Book extends AppCompatActivity {
 
         flag = false;
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -165,13 +177,14 @@ public class Sci_Book extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
+
     /**
      * 文件操作
      */
   /*_____________________________________________________________________*/
 
     //创建文件夹
-    public   void createFolder() {
+    public  void createFolder() {
         //新建一个File，传入文件夹目录
         File file = new File(Environment.getExternalStorageDirectory() + "/a");
         //判断文件夹是否存在，如果不存在就创建，否则不创建

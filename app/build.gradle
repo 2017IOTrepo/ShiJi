@@ -60,5 +60,7 @@ dependencies {
     //  文本浏览器
     implementation 'com.github.bifan-wei:HwTxtReader:V2.1.1'
 
+    // loading
+    implementation 'com.victor:lib:1.0.4'
 
 }

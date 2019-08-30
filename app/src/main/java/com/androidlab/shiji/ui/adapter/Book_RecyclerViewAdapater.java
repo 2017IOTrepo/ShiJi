@@ -36,13 +36,14 @@ import java.util.List;
 
 import static android.widget.Toast.*;
 
-public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_RecyclerViewAdapater.BookViewHolder> {
+public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_RecyclerViewAdapater.BookViewHolder>  {
 
     private List<Sci_Book_Show> list;
     private Context context;
 
-    private ClickInterface clickInterface;
     private FileUtils fileUtils;
+    private ClickInterface clickInterface;
+    private String FilePath = Environment.getExternalStorageDirectory() + "/a/";
 
     public Book_RecyclerViewAdapater(List<Sci_Book_Show> list, Context context){
         this.list = list;
@@ -50,27 +51,26 @@ public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_Recycle
     }
 
 
-    //回调接口
-    public interface ClickInterface {
-
-        void onItemClick(View view, int position);
-    }
-
     public void setOnclick(ClickInterface clickInterface) {
         this.clickInterface = clickInterface;
+    }
+    //回调接口
+    public interface ClickInterface {
+        void onItemClick(View view, int position);
     }
 
     @NonNull
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view  = LayoutInflater.from(context).inflate(R.layout.activity_book_item, null);
-
         BookViewHolder bvh = new BookViewHolder(view);
         return bvh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final BookViewHolder bookViewHolder, final int i) {
+
+
 
         bookViewHolder.book_image.setImageResource(list.get(i).getBook_Image());
         bookViewHolder.book_title.setText(list.get(i).getBook_Title());
@@ -83,23 +83,24 @@ public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_Recycle
 //                // 跳转到图书页
 ////                int position = bookViewHolder.getAdapterPosition();
 //                 String BookName = list.get(i).getBook_Title();
+//                 Toast.makeText(v.getContext(), BookName, Toast.LENGTH_SHORT).show();
 //                 Log.e("BookName", "onClick: "+BookName );
 ////                 Intent i = new Intent(v.getContext(), Sci_ReadBooks.class);
 ////                 i.putExtra("BoonName", BookName);
 ////                 v.getContext().startActivity(i);
 //                 fileUtils.createFolder();
 //                 fileUtils.CopyAssets();
-//                HwTxtPlayActivity.loadTxtFile(v.getContext(),FilePath+BookName+".txt");//传递一个文件路径
+//                 HwTxtPlayActivity.loadTxtFile(v.getContext(),FilePath+BookName+".txt");//传递一个文件路径
 //            }
 //        });
 
-        bookViewHolder.itemdetail.setOnClickListener(new View.OnClickListener() {
+
+        bookViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (clickInterface != null){
-                    clickInterface.onItemClick(v,i);
+                    clickInterface.onItemClick(v, i);
                 }
-
             }
         });
     }
@@ -110,7 +111,7 @@ public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_Recycle
     }
 
 
-     class BookViewHolder extends RecyclerView.ViewHolder {
+    public class BookViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
         ImageView  book_image;
@@ -120,7 +121,7 @@ public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_Recycle
         TextView book_intro;
         LinearLayout itemdetail;
 
-         BookViewHolder(@NonNull View itemView) {
+        public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cv_book);
             book_image = itemView.findViewById(R.id.iv_book);
@@ -132,6 +133,41 @@ public class Book_RecyclerViewAdapater extends RecyclerView.Adapter<Book_Recycle
         }
     }
 
+//
+//
+//    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+//
+//    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+//        this.mOnItemClickListener = listener;
+//    }
+//
+//    /**
+//     * item里面有多个控件可以点击
+//     */
+//
+//
+//    public interface OnRecyclerViewItemClickListener {
+//        void onClick(View view, int position);
+//    }
+//
+//
+//
+//
+//    @Override
+//    public void onClick(View v) {
+//
+//        int postion = (int)v.getTag();
+//        if (mOnItemClickListener != null){
+//            switch (v.getId()){
+//                case R.id.itemdetail:
+//                    mOnItemClickListener.onClick(v,postion);
+//                    break;
+//                default:
+//                    break;
+//
+//            }
+//        }
+//    }
 
 
 
