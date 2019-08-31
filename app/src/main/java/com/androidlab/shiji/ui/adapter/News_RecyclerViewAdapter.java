@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.bean.SearchBox_Bottom_News;
+import com.androidlab.shiji.utils.WebUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -41,7 +44,7 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NewsViewHolder personViewHolder, int position) {
+    public void onBindViewHolder(@NonNull final NewsViewHolder personViewHolder, final int position) {
 
         final int j = position;
 
@@ -49,6 +52,8 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
                 .getPhotoId());
         personViewHolder.news_title.setText(list.get(position).getTitle());
         personViewHolder.news_desc.setText(list.get(position).getDesc());
+        personViewHolder.news_pick.setText(String.valueOf(list.get(position).getPick()));
+        personViewHolder.news_talk.setText(String.valueOf(list.get(position).getTalk()));
 
         // 为btn_share btn_readMore cardView设置点击事件
         // 为btn_share btn_readMore cardView设置点击事件
@@ -56,6 +61,10 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                            int position = personViewHolder.getAdapterPosition();
+                            SearchBox_Bottom_News searchBox_bottom_news = list.get(position);
+                            WebUtils.pickWeb(context, searchBox_bottom_news.getDesc(), searchBox_bottom_news.getUri());
+
 //                        Intent intent = new Intent(context, NewsActivity.class);
 //                        intent.putExtra("News", list.get(j));
 //                        context.startActivity(intent);
@@ -98,15 +107,19 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
         ImageView news_photo;
         TextView news_title;
         TextView news_desc;
+        TextView news_pick;
+        TextView news_talk;
 //        Button share;
 //        Button readMore;
 
         public NewsViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.card_view);
-            news_photo = (ImageView) itemView.findViewById(R.id.news_photo);
-            news_title = (TextView) itemView.findViewById(R.id.news_title);
-            news_desc = (TextView) itemView.findViewById(R.id.news_desc);
+            cardView =  itemView.findViewById(R.id.card_view);
+            news_photo = itemView.findViewById(R.id.news_photo);
+            news_title = itemView.findViewById(R.id.news_title);
+            news_desc = itemView.findViewById(R.id.news_desc);
+            news_pick = itemView.findViewById(R.id.pick_num);
+            news_talk = itemView.findViewById(R.id.talk_num);
 //            share = (Button) itemView.findViewById(R.id.btn_share);
 //            readMore = (Button) itemView.findViewById(R.id.btn_more);
 

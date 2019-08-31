@@ -65,4 +65,18 @@
         <item name="colorPrimaryDark">@color/egi</item>
         <item name="colorAccent">@color/four</item>
     </style>
+
+    <style name="ToolBarTheme" parent="Theme.AppCompat.Light">
+        <item name="android:textColorSecondary">#000000</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+        <item name="dropDownListViewStyle">@style/OverflowDropDownStyle</item>
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">true</item>
+    </style>
+
+    <style name="OverflowDropDownStyle" parent="Widget.AppCompat.Light.ListView.DropDown">
+        <item name="android:dividerHeight">0.5dp</item>
+        <item name="android:divider">#eeeeee</item>
+    </style>
 </resources>

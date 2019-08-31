@@ -73,7 +73,6 @@ public class Sci_Book extends AppCompatActivity {
                 createFolder();
                 CopyAssets();
                 // 使用Handler进行延时  并返回主线程
-
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -83,9 +82,6 @@ public class Sci_Book extends AppCompatActivity {
                         Toast.makeText(Sci_Book.this, BookName, Toast.LENGTH_SHORT).show();
                     }
                 },2000);
-
-
-
 
             }
         });

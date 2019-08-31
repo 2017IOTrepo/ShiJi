@@ -1,18 +1,13 @@
 package com.androidlab.shiji.bean;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.io.Serializable;
 
 public class Sci_History_Show implements Serializable {
-    private String tv_top;
+    private int tv_top;
     private int iv_show;
-    private String tv_des;
+    private int tv_des;
 
-    public Sci_History_Show(String tv_top, String tv_des,int iv_show){
+    public Sci_History_Show(int tv_top, int tv_des, int iv_show){
         this.tv_des = tv_des;
         this.iv_show = iv_show;
         this.tv_top = tv_top;
@@ -20,11 +15,11 @@ public class Sci_History_Show implements Serializable {
     }
 
 
-    public String getTv_top() {
+    public int getTv_top() {
         return tv_top;
     }
 
-    public void setTv_top(String tv_top) {
+    public void setTv_top(int tv_top) {
         this.tv_top = tv_top;
     }
 
@@ -36,11 +31,11 @@ public class Sci_History_Show implements Serializable {
         this.iv_show = iv_show;
     }
 
-    public String getTv_des() {
+    public int getTv_des() {
         return tv_des;
     }
 
-    public void setTv_des(String tv_des) {
+    public void setTv_des(int tv_des) {
         this.tv_des = tv_des;
     }
 }

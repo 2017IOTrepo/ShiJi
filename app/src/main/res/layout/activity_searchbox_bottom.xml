@@ -72,10 +72,10 @@
                    android:layout_marginRight="6dp"
                    />
                 <TextView
+                    android:id="@+id/pick_num"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_toRightOf="@+id/pick"
-
                     android:text="12"
                     android:textSize="13sp"
 
@@ -91,6 +91,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/talk_num"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_toRightOf="@+id/talk"

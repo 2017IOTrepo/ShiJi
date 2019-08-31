@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="420dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
@@ -31,7 +31,7 @@
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/iv_item"
         android:text="大爆炸之后的十秒(公元2020-2021)"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textColor="#fff"
         android:layout_marginLeft="10dp"/>
 
@@ -40,9 +40,8 @@
         android:layout_width="310dp"
         android:layout_height="370dp"
         android:layout_alignParentTop="true"
-
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="60dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="5dp"
@@ -50,19 +49,18 @@
 
         <ImageView
             android:id="@+id/card_iv"
-            android:layout_width="290dp"
-            android:layout_height="290dp"
-            android:layout_margin="10dp"
+            android:layout_width="270dp"
+            android:layout_height="230dp"
+            android:layout_margin="20dp"
             android:src="@drawable/item"
             />
         <TextView
             android:id="@+id/tv_des"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom"
+            android:layout_height="100dp"
+            android:layout_marginTop="270dp"
             android:layout_marginLeft="10dp"
             android:text="大禹治水是中国著名的上古大浑水的传说，三黄五帝时期次呢改进道森股份绝对不会加法边时间的话东江环保返回键"
-            android:textColor="@color/characters"
             android:textStyle="normal"
             />
 
