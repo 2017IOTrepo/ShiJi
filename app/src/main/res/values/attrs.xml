@@ -9,4 +9,16 @@
         <attr name="dashOrientation" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="buttonView">
+        <attr name="onBackground" format="reference"></attr>
+        <attr name="offBackground" format="reference"></attr>
+        <attr name="circleColor" format="reference"></attr>
+        <attr name="time" format="integer"></attr>
+        <attr name="layout_width" format="dimension"></attr>
+        <attr name="layout_height" format="dimension"></attr>
+    </declare-styleable>
+
+
+
+
 </resources>

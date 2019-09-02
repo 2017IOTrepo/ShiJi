@@ -79,4 +79,17 @@
         <item name="android:dividerHeight">0.5dp</item>
         <item name="android:divider">#eeeeee</item>
     </style>
+
+    <!--setting-->
+    <style name="set_style" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/sev</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/egi</item>
+        <item name="colorAccent">@color/four</item>
+    </style>
+
+    <!--dialog-->
+    <style name="DialogStyle" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

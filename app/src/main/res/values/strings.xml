@@ -206,13 +206,13 @@
 
 
 
-
-
-
-
-
-
-
+    <string name="accept_news">安全模式</string>
+    <string name="loundspeaker">使用扬声器播放语音</string>
+    <string name="shock">震动</string>
+    <string name="sound">声音</string>
+    <string name="logout">退出登录</string>
+    <string name="news_notice">新消息提醒</string>
+    <string name="chat">聊天</string>
 
 
 

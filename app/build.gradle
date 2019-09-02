@@ -62,5 +62,7 @@ dependencies {
 
     // loading
     implementation 'com.victor:lib:1.0.4'
+    //SlideSwitch
+
 
 }

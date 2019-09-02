@@ -1,5 +1,6 @@
 package com.androidlab.shiji;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.androidlab.shiji.activity.SideMenu.SlideSetting;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
+import com.androidlab.shiji.ui.view.AlertDialog;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -49,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Drawer result = null;
     private MiniDrawer miniResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
+    private AlertDialog mDialog;
 
 
 
@@ -137,13 +141,26 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         }else
                         if (drawerItem.getIdentifier() == 2) {
-                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
-
+//                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(MainActivity.this, SlideSetting.class);
+                            startActivity(i);
                             return true;
                         }else
                         if (drawerItem.getIdentifier() == 3) {
-                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                            builder.setTitle("提示框")//这里设置标题
+                                    .setMessage("已经是最新版本！")//这里设置提示信息
+                                    .setTopImage(R.drawable.dialog_update)//这里设置顶部图标
+                                    .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            mDialog.dismiss();
+                                        }
+                                    });
+                            mDialog = builder.create();
+                            mDialog.show();
                             return true;
                         }else
                         if (drawerItem.getIdentifier() == 4) {
