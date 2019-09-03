@@ -34,9 +34,7 @@
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-        android:orientation=
-
-            "vertical"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -56,6 +54,9 @@
             />
 
     </RelativeLayout>
+
+
+
 
 
 </LinearLayout>
