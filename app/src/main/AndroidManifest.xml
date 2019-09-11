@@ -72,9 +72,27 @@
             >
 
         </activity>
+        
+        <activity android:name=".activity.popular_science.Book_LiShi"
+            android:theme="@style/Sci_Book">
+            
+        </activity>
 
+        <activity android:name=".activity.popular_science.Book_YiXue">
+            
+        </activity>
 
+        <activity android:name=".activity.popular_science.Book_ShiGe">
+            
+        </activity>
 
+        <activity android:name=".activity.popular_science.Book_YiShu">
+
+        </activity>
+
+        <activity android:name=".activity.popular_science.test">
+
+        </activity>
     </application>
 
 </manifest>

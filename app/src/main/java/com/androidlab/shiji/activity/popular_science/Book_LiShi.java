@@ -1,7 +1,6 @@
 package com.androidlab.shiji.activity.popular_science;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,22 +9,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidlab.shiji.R;
+import com.androidlab.shiji.bean.LiShi_News;
 import com.androidlab.shiji.bean.Sci_Book_Show;
 import com.androidlab.shiji.ui.adapter.Book_RecyclerViewAdapater;
+import com.androidlab.shiji.ui.view.BannerLayout;
+import com.androidlab.shiji.utils.WebUtils;
 import com.bifan.txtreaderlib.ui.HwTxtPlayActivity;
-import com.victor.loading.book.BookLoading;
-
+import com.lzj.gallery.library.views.BannerViewPager;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,83 +34,64 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Sci_Book extends AppCompatActivity {
+public class Book_LiShi  extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    int y;
-    private List<Sci_Book_Show> list = new ArrayList<>();
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private BannerViewPager banner;
+
+    private  List<String> urlList;
+    private RecyclerView recyclerView_lishi;
     private Book_RecyclerViewAdapater adapater;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private List<Sci_Book_Show> list = new ArrayList<>();
     private ProgressBar progressBar;
-
-    private CardView cardView1;
-    private CardView cardView2;
-    private CardView cardView3;
-    private CardView cardView4;
-
-
+    private Context context;
     private String FilePath = Environment.getExternalStorageDirectory() + "/a/";
 
-    private LinearLayout itemdetail;
 
-
-    private boolean flag = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book);
-        recyclerView = findViewById(R.id.rc_book);
+        setContentView(R.layout.activity_book_lishi);
+        BannerLayout  recyclerBanner =  findViewById(R.id.recycler);
+
         progressBar = findViewById(R.id.progress_bar);
+        recyclerView_lishi = findViewById(R.id.recyclerview_lishi);
 
-        cardView1 = findViewById(R.id.cardview1);
-        cardView2 = findViewById(R.id.cardview2);
-        cardView3 = findViewById(R.id.cardview3);
-        cardView4 = findViewById(R.id.cardview4);
-
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         initBook();
-        adapater = new Book_RecyclerViewAdapater(list, this);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapater);
+        // 书籍item
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        adapater  = new Book_RecyclerViewAdapater(list, this);
+        recyclerView_lishi.setHasFixedSize(true);
+        recyclerView_lishi.setLayoutManager(layoutManager);
+        recyclerView_lishi.setAdapter(adapater);
 
-        cardView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Sci_Book.this, Book_LiShi.class);
-                startActivity(i);
-            }
-        });
-        cardView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Sci_Book.this, Book_ShiGe.class);
-                startActivity(i);
-            }
-        });
 
-        cardView3.setOnClickListener(new View.OnClickListener() {
+        // 轮播图
+        List<String> list_banner = new ArrayList<>();
+        list_banner.add("http://ww1.sinaimg.cn/large/006nBCHPly1g6vvo3uj67j30dw09mt9h.jpg");
+        list_banner.add("http://ww1.sinaimg.cn/large/006nBCHPly1g6vvof0h3fj331d1k5kb6.jpg");
+        list_banner.add("http://ww1.sinaimg.cn/large/006nBCHPly1g6vvomn6aaj30hs0bvt9e.jpg");
+        list_banner.add("http://ww1.sinaimg.cn/large/006nBCHPly1g6vvot9sndj30ci058glv.jpg");
+        list_banner.add("http://ww1.sinaimg.cn/large/006nBCHPly1g6vvp0hfr6j30hs0bvt9p.jpg");
+        WebBannerAdapter webBannerAdapter=new WebBannerAdapter(this,list_banner);
+        webBannerAdapter.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Sci_Book.this, Book_YiShu.class);
-                startActivity(i);
+            public void onItemClick(int position) {
+//                Toast.makeText(Book_LiShi.this, "点击了第 " + position+" 项", Toast.LENGTH_SHORT).show();
+                WebUtils.pickWeb(getApplication(),LiShi_News[position].getDesc(),LiShi_News[position].getUrl());
             }
         });
+        recyclerBanner.setAdapter(webBannerAdapter);
 
-        cardView4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Sci_Book.this, Book_YiXue.class);
-                startActivity(i);
-            }
-        });
+
+
+        // item点击的事件
         adapater.setOnclick(new Book_RecyclerViewAdapater.ClickInterface() {
             @Override
             public void onItemClick(final View view, final int position) {
                 Log.e("DoitemClick", "onItemClick: " );
                 final String BookName = list.get(position).getBook_Title();
-                createFolder();
+//                createFolder();
 //                CopyAssets();
                 // 使用Handler进行延时  并返回主线程
                 progressBar.setVisibility(View.VISIBLE);
@@ -121,12 +100,13 @@ public class Sci_Book extends AppCompatActivity {
                     public void run() {
                         progressBar.setVisibility(View.GONE);
                         HwTxtPlayActivity.loadTxtFile(view.getContext(),FilePath+BookName+".txt");//传递一个文件路径
-                        Toast.makeText(Sci_Book.this, BookName, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Book_LiShi.this, BookName, Toast.LENGTH_SHORT).show();
                     }
                 },2000);
 
             }
         });
+
 
         mSwipeRefreshLayout = findViewById( R.id.swipe_refresh );
         mSwipeRefreshLayout.setColorSchemeResources( R.color.egi );
@@ -140,50 +120,40 @@ public class Sci_Book extends AppCompatActivity {
         ActionBar mActionBar=getSupportActionBar();
         mActionBar.setHomeButtonEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);
-        mActionBar.setTitle("中国古籍");
+        mActionBar.setTitle("历史古籍");
 
-        flag = false;
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000) {
-            TranslateAnimation animation = new TranslateAnimation(0, 0, -y, 0);
-            animation.setDuration(520);
-            animation.setFillAfter(true);
-            recyclerView.startAnimation(animation);
-        }
-    }
 
+    private Sci_Book_Show[] books_lishi = {
 
-    private Sci_Book_Show[] book_shows = {
-            new Sci_Book_Show(R.drawable.yiming2, "八美图", "佚名", "描写宋代杭州人柳树春经历的悲欢离合故事。", "艺藏"),
-            new Sci_Book_Show(R.drawable.penghaozi, "定鼎奇闻", "蓬蒿子", "通过奇闻异事反映清政府的现实。", "艺藏"),
-            new Sci_Book_Show(R.drawable.caoxueqin, "红楼梦", "曹雪芹", "是一部具有世界影响力的人情小说，举世公认的中国古典小说巅峰之作。", "艺藏"),
-            new Sci_Book_Show(R.drawable.wujingzi, "儒林外史", "吴敬梓", "代表着中国古代讽刺小说的高峰，它开创了以小说直接评价现实生活的范例。", "艺藏"),
-            new Sci_Book_Show(R.drawable.lishizhen, "本草纲目", "李时珍", "是述本草要籍与药性理论的著作。", "医藏"),
-            new Sci_Book_Show(R.drawable.bianque, "八十一难经", "扁鹊", "是中医现存较早的经典著作。", "医藏"),
-            new Sci_Book_Show(R.drawable.zhuzhenheng, "丹溪心法", "朱震亨", "是一部综合性医书，共五卷（一作三卷）。", "医藏"),
-            new Sci_Book_Show(R.drawable.qikong, "外科大成", "祁坤", "是中医外科重要参考书。", "医藏"),
-            new Sci_Book_Show(R.drawable.shiji, "史记", "司马迁", "中国历史上第一部纪传体通史", "史藏"),
-            new Sci_Book_Show(R.drawable.xuanzang, "大唐西域记", "玄奘", "是由唐代玄奘口述、辩机编的地理史籍，成书于唐贞观二十年。", "史藏"),
             new Sci_Book_Show(R.drawable.bangu, "汉书", "班固", "是中国第一部纪传体断代史，“二十四史”之一。", "史藏"),
+            new Sci_Book_Show(R.drawable.libaiyao, "北齐书", "李百药", "属纪传体断代史，共50卷，纪8卷，列传42卷。", "史藏"),
+            new Sci_Book_Show(R.drawable.xuanzang, "大唐西域记", "玄奘", "是由唐代玄奘口述、辩机编的地理史籍，成书于唐贞观二十年。", "史藏"),
             new Sci_Book_Show(R.drawable.simaguang, "资治通鉴", "司马光", "是一部多卷本编年体史书，共294卷。", "史藏"),
-            new Sci_Book_Show(R.drawable.zhangheng, "二京赋", "张衡", "是张衡的代表作之一，包括《西京赋》、《东京赋》两篇。", "诗藏"),
-            new Sci_Book_Show(R.drawable.baipu, "白朴元曲集", "白朴", "是白朴创作的其他类书籍。", "诗藏")
+            new Sci_Book_Show(R.drawable.yinmo, "五代春秋", "尹沫", "是考察五代春秋时期的重要史料。", "史藏"),
+            new Sci_Book_Show(R.drawable.zhongtai, "中国哲学史", "钟泰", "是梳理学术大旨及源流的著作。", "史藏")
+
+    };
+
+
+    private LiShi_News[] LiShi_News = {
+            new LiShi_News("https://baike.baidu.com/item/北齐书", "北齐书"),
+            new LiShi_News("https://baike.baidu.com/item/大唐西域记", "大唐西域记"),
+            new LiShi_News("https://baike.baidu.com/item/汉书", "汉书"),
+            new LiShi_News("https://baike.baidu.com/item/史记/254522?fr=aladdin", "史记"),
+            new LiShi_News("https://baike.baidu.com/item/资治通鉴", "资治通鉴")
 
     };
 
     public  void  initBook(){
-         list.clear();
-         for (int i = 0; i < 5; i ++){
-             Random ra = new Random();
-             int index = ra.nextInt(book_shows.length);
-             list.add(book_shows[index]);
-         }
+        list.clear();
+        for (int i = 0; i < 5; i ++){
+            Random ra = new Random();
+            int index = ra.nextInt(books_lishi.length);
+            list.add(books_lishi[index]);
+        }
     }
 
 
@@ -219,7 +189,7 @@ public class Sci_Book extends AppCompatActivity {
     /**
      * 文件操作
      */
-  /*_____________________________________________________________________*/
+    /*_____________________________________________________________________*/
 
     //创建文件夹
     public  void createFolder() {
@@ -229,9 +199,8 @@ public class Sci_Book extends AppCompatActivity {
         if (!file.exists()) {
             //通过file的mkdirs()方法创建目录中包含却不存在的文件夹
             file.mkdirs();
-            Log.i("4444444", "createFolder: ");
         }else{
-            Log.i("445555554", "createFolder: ");
+
         }
     }
 
@@ -289,12 +258,7 @@ public class Sci_Book extends AppCompatActivity {
     }
 
 
-  /*_____________________________________________________________________*/
-
-
-
-
-
+    /*_____________________________________________________________________*/
 
 
 }

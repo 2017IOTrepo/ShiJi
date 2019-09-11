@@ -52,6 +52,7 @@ public class Fragment_Search extends Fragment {
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         view = inflater.inflate(R.layout.fragment1, container, false);
         editText = view.findViewById(R.id.et_searchtext_search);
+        editText.setText(" ");
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +67,6 @@ public class Fragment_Search extends Fragment {
 
         initPersonData();
         adapter = new News_RecyclerViewAdapter(list, getContext());
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

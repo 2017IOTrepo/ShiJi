@@ -32,6 +32,7 @@ public class News_RecyclerViewAdapter extends RecyclerView.Adapter<News_Recycler
     }
 
 
+
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

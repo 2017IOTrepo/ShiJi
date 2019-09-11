@@ -62,7 +62,18 @@ dependencies {
 
     // loading
     implementation 'com.victor:lib:1.0.4'
-    //SlideSwitch
+
+    //内存泄露
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
+    //banner
+    implementation 'com.github.lzjin:ViewPagerGallery:1.2'
+    implementation 'com.github.LillteZheng:ViewPagerHelper:v1.5'
+
+
 
 
 }
