@@ -78,15 +78,18 @@
             
         </activity>
 
-        <activity android:name=".activity.popular_science.Book_YiXue">
+        <activity android:name=".activity.popular_science.Book_YiXue"
+            android:theme="@style/Sci_Book">
             
         </activity>
 
-        <activity android:name=".activity.popular_science.Book_ShiGe">
+        <activity android:name=".activity.popular_science.Book_ShiGe"
+            android:theme="@style/Sci_Book">
             
         </activity>
 
-        <activity android:name=".activity.popular_science.Book_YiShu">
+        <activity android:name=".activity.popular_science.Book_YiShu"
+            android:theme="@style/Sci_Book">
 
         </activity>
 

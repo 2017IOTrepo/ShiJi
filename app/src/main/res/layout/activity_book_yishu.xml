@@ -13,8 +13,7 @@
         app:centerScale="1.3"
         app:itemSpace="20"
         app:moveSpeed="1.8"
-       />
-
+        />
     <View
         android:layout_width="320dp"
         android:layout_height="1dp"
@@ -25,6 +24,7 @@
         >
     </View>
 
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_marginTop="15dp"
         android:layout_below="@+id/recycler"
@@ -34,13 +34,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_lishi"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/banner">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_yishu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/banner">
 
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar

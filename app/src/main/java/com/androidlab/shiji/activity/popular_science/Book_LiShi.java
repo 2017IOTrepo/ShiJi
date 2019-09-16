@@ -36,7 +36,6 @@ import java.util.Random;
 
 public class Book_LiShi  extends AppCompatActivity {
 
-    private BannerViewPager banner;
 
     private  List<String> urlList;
     private RecyclerView recyclerView_lishi;
