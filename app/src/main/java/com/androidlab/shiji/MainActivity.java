@@ -43,7 +43,9 @@ import me.majiajie.pagerbottomtabstrip.MaterialMode;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
+
 import static com.androidlab.shiji.R.id.tab;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -59,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
     //private ProgressBar progress_update;
 
 
-
     NavigationController mNavigationController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-      //  progress_update = findViewById(R.id.progress_update);
+        //  progress_update = findViewById(R.id.progress_update);
 
         mNavigationController = pageBottomTabLayout.material()
                 .addItem(R.drawable.ser, "搜索", testColors[0])
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mNavigationController.setupWithViewPager(viewPager);
         //设置消息圆点
 //        mNavigationController.setMessageNumber(0,1);
-        mNavigationController.setHasMessage(2,true);
+        mNavigationController.setHasMessage(2, true);
 
         // 也可以设置Item选中事件的监听
         mNavigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
@@ -145,42 +147,38 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 2) {
+                        } else if (drawerItem.getIdentifier() == 2) {
 //                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(MainActivity.this, SlideSetting.class);
                             startActivity(i);
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 3) {
+                        } else if (drawerItem.getIdentifier() == 3) {
                             //Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
-                             new Handler().postDelayed(new Runnable() {
-                                 @Override
-                                 public void run() {
-                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                     builder.setTitle("提示框")//这里设置标题
-                                             .setMessage("已经是最新版本！")//这里设置提示信息
-                                             .setTopImage(R.drawable.dialog_update)//这里设置顶部图标
-                                             .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
-                                                 @Override
-                                                 public void onClick(DialogInterface dialog, int which) {
-                                                     mDialog.dismiss();
-                                                 }
-                                             });
-                                     mDialog = builder.create();
-                                     mDialog.show();
-                                 }
-                             },500);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("升级检测")//这里设置标题
+                                            .setMessage("已经是最新版本！")//这里设置提示信息
+                                            .setTopImage(R.drawable.dialog_update)//这里设置顶部图标
+                                            .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    mDialog.dismiss();
+                                                }
+                                            });
+                                    mDialog = builder.create();
+                                    mDialog.show();
+                                }
+                            }, 500);
 
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 4) {
+                        } else if (drawerItem.getIdentifier() == 4) {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 5) {
+                        } else if (drawerItem.getIdentifier() == 5) {
 //                            new LibsBuilder()
 //                                    .withFields(R.string.class.getFields())
 //                                    .withActivityStyle(Libs.ActivityStyle.DARK)
@@ -236,7 +234,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private long mExitTime;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //判断用户是否点击了“返回键”
