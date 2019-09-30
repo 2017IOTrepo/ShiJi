@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storePassword '135831'
+            keyAlias = 'key0'
+            keyPassword '135831'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.androidlab.shiji"
