@@ -3,6 +3,7 @@
 buildscript {
     
     repositories {
+        mavenCentral()
         google()
         jcenter()
     }
@@ -22,9 +23,14 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/"
                 url "https://jitpack.io"
-
+        }
+        maven { url 'https://maven.google.com' }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
 
         }
+
+
     }
     tasks.withType(Javadoc) {
         options.encoding = "UTF-8"
