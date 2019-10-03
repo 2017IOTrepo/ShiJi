@@ -1,20 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TestActivity">
 
-
-    <ImageView
+    <com.androidlab.shiji.helper.NoScrollViewPager
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffcc6f"
-        android:contentDescription="@string/todo"/>
-    <TextView
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:text="Fragment2"
-        android:textSize="30sp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_height="0dp"
+        android:layout_weight="10">
 
-</RelativeLayout>
+    </com.androidlab.shiji.helper.NoScrollViewPager>
+
+    <FrameLayout
+        android:id="@+id/timeLineLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <LinearLayout
+            android:layout_gravity="center|top"
+            android:background="#ff0000"
+            android:layout_width="3dp"
+            android:layout_height="20dp">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/layout_year"
+                android:layout_weight="7"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/timeLine_Rec"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_Dynasty"
+                android:orientation="vertical"
+                android:background="#d9d9d9"
+                android:layout_weight="4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text_Dynasty"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:text="现代"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </FrameLayout>
+
+</LinearLayout>

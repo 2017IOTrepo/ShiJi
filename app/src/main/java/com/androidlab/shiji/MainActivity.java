@@ -2,8 +2,6 @@ package com.androidlab.shiji;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +9,11 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
-import com.androidlab.shiji.ui.adapter.MyViewPagerAdapter;
+import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -67,21 +63,21 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         mNavigationController = pageBottomTabLayout.material()
-                .addItem(R.drawable.ic_ondemand_video_black_24dp, "Movies & TV", testColors[0])
-                .addItem(R.drawable.ic_audiotrack_black_24dp, "Music", testColors[1])
-                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
-                .addItem(R.drawable.ic_news_black_24dp, "Newsstand", testColors[3])
+                .addItem(R.drawable.search, "搜索", testColors[0])
+                .addItem(R.drawable.map1, "地图", testColors[1])
+//                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
+                .addItem(R.drawable.kepu, "科普", testColors[2])
                 .setDefaultColor(0x89FFFFFF)//未选中状态的颜色
                 .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR | MaterialMode.HIDE_TEXT)//这里可以设置样式模式，总共可以组合出4种效果
                 .build();
 
-        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager(), mNavigationController.getItemCount()));
+        viewPager.setAdapter(new MainViewPagerAdapter(getSupportFragmentManager(), mNavigationController.getItemCount()));
 
         // 自动适配ViewPager页面切换
         mNavigationController.setupWithViewPager(viewPager);
         //设置消息圆点
 //        mNavigationController.setMessageNumber(0,1);
-        mNavigationController.setHasMessage(3,true);
+        mNavigationController.setHasMessage(2,true);
 
         // 也可以设置Item选中事件的监听
         mNavigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
@@ -95,9 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("asd", "onRepeat selected: " + index);
             }
         });
-
-
-
 
 
         //侧滑栏
@@ -123,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 .withDrawerWidthDp(72)
                 .withGenerateMiniDrawer(true)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
+                .withScrollToTopAfterClick(true)
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.side_user).withDescription("查看个人信息").withIcon(MaterialDesignIconic.Icon.gmi_car).withIdentifier(1),
                         new PrimaryDrawerItem().withName(R.string.side_set).withIcon(MaterialDesignIconic.Icon.gmi_directions_run).withIdentifier(2),
