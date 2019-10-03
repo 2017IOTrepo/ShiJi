@@ -1,7 +1,9 @@
 package com.androidlab.shiji;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +13,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidlab.shiji.activity.SideMenu.SlideSetting;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
+import com.androidlab.shiji.ui.view.AlertDialog;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -38,7 +43,9 @@ import me.majiajie.pagerbottomtabstrip.MaterialMode;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
+
 import static com.androidlab.shiji.R.id.tab;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -49,10 +56,13 @@ public class MainActivity extends AppCompatActivity {
     private Drawer result = null;
     private MiniDrawer miniResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
+    private AlertDialog mDialog;
 
+    //private ProgressBar progress_update;
 
 
     NavigationController mNavigationController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.viewPager);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        //  progress_update = findViewById(R.id.progress_update);
+
         mNavigationController = pageBottomTabLayout.material()
-                .addItem(R.drawable.search, "搜索", testColors[0])
+                .addItem(R.drawable.ser, "搜索", testColors[0])
                 .addItem(R.drawable.map1, "地图", testColors[1])
 //                .addItem(R.drawable.ic_book_black_24dp, "Books", testColors[2])
-                .addItem(R.drawable.kepu, "科普", testColors[2])
+                .addItem(R.drawable.kepu, "科普", testColors[3])
                 .setDefaultColor(0x89FFFFFF)//未选中状态的颜色
                 .setMode(MaterialMode.CHANGE_BACKGROUND_COLOR | MaterialMode.HIDE_TEXT)//这里可以设置样式模式，总共可以组合出4种效果
                 .build();
@@ -77,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         mNavigationController.setupWithViewPager(viewPager);
         //设置消息圆点
 //        mNavigationController.setMessageNumber(0,1);
-        mNavigationController.setHasMessage(2,true);
+        mNavigationController.setHasMessage(2, true);
 
         // 也可以设置Item选中事件的监听
         mNavigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
@@ -135,29 +147,44 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 2) {
+                        } else if (drawerItem.getIdentifier() == 2) {
+//                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(MainActivity.this, SlideSetting.class);
+                            startActivity(i);
+                            return true;
+                        } else if (drawerItem.getIdentifier() == 3) {
+                            //Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("升级检测")//这里设置标题
+                                            .setMessage("已经是最新版本！")//这里设置提示信息
+                                            .setTopImage(R.drawable.dialog_update)//这里设置顶部图标
+                                            .setPositiveButton("我知道了", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    mDialog.dismiss();
+                                                }
+                                            });
+                                    mDialog = builder.create();
+                                    mDialog.show();
+                                }
+                            }, 500);
+
+                            return true;
+                        } else if (drawerItem.getIdentifier() == 4) {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
                             return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 3) {
-                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
-
-                            return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 4) {
-                            Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
-
-                            return true;
-                        }else
-                        if (drawerItem.getIdentifier() == 5) {
+                        } else if (drawerItem.getIdentifier() == 5) {
 //                            new LibsBuilder()
 //                                    .withFields(R.string.class.getFields())
 //                                    .withActivityStyle(Libs.ActivityStyle.DARK)
 //                                    .start(MainActivity.this);
                             Intent intent = new Intent();
-                            Uri uri = Uri.parse("https://github.com/DreamMemory001");
+                            Uri uri = Uri.parse("https://github.com/xmmmmmovo/ShiJi");
                             intent.setAction(Intent.ACTION_VIEW);
                             intent.setData(uri);
                             startActivity(intent);
@@ -207,7 +234,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private long mExitTime;
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //判断用户是否点击了“返回键”

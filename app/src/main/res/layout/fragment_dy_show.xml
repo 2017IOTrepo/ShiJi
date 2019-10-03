@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    tools:context="MainActivity"
+    >
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/fragment_list_rv"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:listitem="@layout/list_item"/>-->
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_dy"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3px"
+        app:cardUseCompatPadding="false"
+        android:layout_margin="5dp"
+
+
+        >
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="简介:"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:layout_margin="25dp"
+            />
+
+        <TextView
+            android:id="@+id/text_des"
+
+            android:layout_margin="80dp"
+            android:layout_width="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="      jbfdhjkfjsbdf分布式打火机空白啥都不繁花似锦发布时间活动板房"/>
+    </android.support.v7.widget.CardView>
+
+
+
+</android.support.v4.widget.NestedScrollView>

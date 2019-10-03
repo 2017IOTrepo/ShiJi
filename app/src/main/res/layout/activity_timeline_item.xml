@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="420dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <com.androidlab.shiji.ui.view.DashView
+        android:id="@+id/iv_item"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="30dp"
+        android:layout_height="450dp"
+        app:dashWidth="2dp"
+        app:lineWidth="4dp"
+        app:lineColor="#fffbfb"
+        app:dashOrientation="1"
+        app:lineHeight="1dp"
+        />
+    <com.androidlab.shiji.ui.view.Draw_Cricle
+        android:id="@+id/circle"
+        android:layout_width="30dp"
+        android:layout_height="80dp" />
+
+    <TextView
+        android:id="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/circle"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/iv_item"
+        android:text="大爆炸之后的十秒(公元2020-2021)"
+        android:textSize="17sp"
+        android:textColor="#fff"
+        android:layout_marginLeft="10dp"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/carview1"
+        android:layout_width="310dp"
+        android:layout_height="370dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0px">
+
+        <ImageView
+            android:id="@+id/card_iv"
+            android:layout_width="270dp"
+            android:layout_height="230dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/item"
+            />
+        <TextView
+            android:id="@+id/tv_des"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="270dp"
+            android:layout_marginLeft="10dp"
+            android:text="大禹治水是中国著名的上古大浑水的传说，三黄五帝时期次呢改进道森股份绝对不会加法边时间的话东江环保返回键"
+            android:textStyle="normal"
+            />
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

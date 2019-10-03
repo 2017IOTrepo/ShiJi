@@ -1,18 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:background="@drawable/f3back">
 
 
 
 
-    <TextView
-        android:layout_width="500dp"
-        android:layout_height="500dp"
-        android:text="Fragment3"
-        android:textSize="30sp"
+
+   <android.support.v7.widget.CardView
+       android:id="@+id/carview1"
+       android:layout_width="120dp"
+       android:layout_height="120dp"
+       android:clickable="true"
+       android:foreground="?android:attr/selectableItemBackground"
+       app:cardCornerRadius="5dp"
+       app:cardElevation="3px"
+       app:cardUseCompatPadding="false"
+       android:layout_margin="10dp"
+       app:cardBackgroundColor="@android:color/transparent">
+
+       <ImageView
+           android:id="@+id/histroy"
+           android:layout_width="50dp"
+           android:layout_height="50dp"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="20dp"
+           android:src="@drawable/histroy"
+           />
+       <TextView
+           android:layout_width="60dp"
+           android:layout_height="wrap_content"
+           android:text="中国简史"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="70dp"
+           android:textColor="#0b0b0b"
+           />
+       <TextView
+           android:layout_width="90dp"
+           android:layout_height="wrap_content"
+           android:text="中国发展的简史"
+           android:layout_gravity="center_horizontal"
+           android:textSize="12sp"
+           android:layout_marginTop="90dp"
+           />
+   </android.support.v7.widget.CardView>
+
+
+
+
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sci1"
+        android:layout_toRightOf="@+id/carview1"
+        android:layout_marginTop="20dp"/>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3px"
+        android:layout_margin="20dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        app:cardBackgroundColor="@android:color/transparent">
+
+
+        <ImageView
+            android:id="@+id/iv2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/book"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            />
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="全古籍"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="100dp"
+            android:textSize="20sp"
+            android:textColor="#0b0b0b"
+            />
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:text="中国历史古籍"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="135dp"
+            android:textSize="14sp"/>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview3"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="10dp"
+        android:clickable="true"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3px"
+        card_view:cardBackgroundColor="@android:color/transparent"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/iv3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/dy"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
+
+
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="国家朝代"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            android:textColor="#0b0b0b"/>
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="中国历史朝代分割"
+            android:textSize="12sp"
+            android:layout_marginTop="80dp"
+            />
+
+    </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:layout_width="220dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/sci2" />
 
 </RelativeLayout>
