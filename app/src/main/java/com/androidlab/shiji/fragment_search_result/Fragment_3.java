@@ -59,6 +59,7 @@ public class Fragment_3 extends Fragment {
          * @param color
          *            变化的色值
          * @param text
+         *
          *            文字
          * @param keyword
          *            文字中的关键字
