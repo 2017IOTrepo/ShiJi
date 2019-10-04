@@ -16,18 +16,14 @@ import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
 
 public class Search_Item_Activity extends AppCompatActivity{
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
-
-
         PageNavigationView tab = findViewById(R.id.tab);
 
         NavigationController navigationController = tab.custom()
-
                 .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"词向量"))
                 .addItem(newRoundItem(R.drawable.ic_nearby_gray_24dp,R.drawable.ic_nearby_teal_24dp,"地图"))
                 .addItem(newItem(R.drawable.ic_favorite_gray_24dp,R.drawable.ic_favorite_teal_24dp,"古籍分布"))
