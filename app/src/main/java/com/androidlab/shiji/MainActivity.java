@@ -245,8 +245,20 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         read();
-        if (!StaticVariable.isLogin) {
+        if (StaticVariable.isLogin) {
+            save();
         } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("注意")
+                    .setMessage("检测到你没有注册 请现在注册")
+                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            
+                        }
+                    })
+                    .create()
+                    .show();
         }
     }
 
@@ -257,28 +269,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void save() {
-        //获取一个 SharedPreferences对象
-        //第一个参数：指定文件的名字，只会续写不会覆盖
-        //第二个参数：MODE_PRIVATE只有当前应用程序可以续写
-        //向其中添加数据，是什么数据类型就put什么，前面是键，后面是数据
         editor.putString("Email", user.getEmail());
         editor.putString("Password", user.getPassword());
         editor.putBoolean("isLogin", StaticVariable.isLogin);
-        //调用apply方法将添加的数据提交，从而完成存储的动作
         editor.apply();
     }
 
     private void read() {
-        //然后通过键的方式取出，后边是如果找不到的默认内容
-        String name = preferences.getString("", "");
-        int age = preferences.getString("age", 0);
-        int age = preferences.getBoolean("isLogin", false);
+        user.setEmail(preferences.getString("Email", ""));
+        user.setPassword(preferences.getString("Password", ""));
+        StaticVariable.isLogin = preferences.getBoolean("isLogin", false);
     }
 
-    private boolean isLogin() {
-        return false;
-    }
+    private void login() {
 
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
