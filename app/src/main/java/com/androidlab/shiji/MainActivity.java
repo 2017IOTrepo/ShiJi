@@ -2,6 +2,7 @@ package com.androidlab.shiji;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.view.GravityCompat;
@@ -17,8 +18,11 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidlab.shiji.activity.SideMenu.SlideSetting;
+import com.androidlab.shiji.bean.User;
+import com.androidlab.shiji.bean.UserIns;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.androidlab.shiji.ui.view.AlertDialog;
+import com.androidlab.shiji.utils.StaticVariable;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -57,11 +61,16 @@ public class MainActivity extends AppCompatActivity {
     private MiniDrawer miniResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private AlertDialog mDialog;
+    private long mExitTime;
 
     //private ProgressBar progress_update;
 
 
     NavigationController mNavigationController;
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private UserIns user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,9 +242,43 @@ public class MainActivity extends AppCompatActivity {
                 //Log.e("CrossfadeDrawerLayout", "crossfade: " + currentSlidePercentage + " - " + slideOffset);
             }
         });
+
+        init();
+        read();
+        if (!StaticVariable.isLogin) {
+        } else {
+        }
     }
 
-    private long mExitTime;
+    private void init() {
+        preferences = getSharedPreferences("data", MODE_PRIVATE);
+        editor = preferences.edit();
+        user = User.INSTANCE.getUserIns();
+    }
+
+    private void save() {
+        //获取一个 SharedPreferences对象
+        //第一个参数：指定文件的名字，只会续写不会覆盖
+        //第二个参数：MODE_PRIVATE只有当前应用程序可以续写
+        //向其中添加数据，是什么数据类型就put什么，前面是键，后面是数据
+        editor.putString("Email", user.getEmail());
+        editor.putString("Password", user.getPassword());
+        editor.putBoolean("isLogin", StaticVariable.isLogin);
+        //调用apply方法将添加的数据提交，从而完成存储的动作
+        editor.apply();
+    }
+
+    private void read() {
+        //然后通过键的方式取出，后边是如果找不到的默认内容
+        String name = preferences.getString("", "");
+        int age = preferences.getString("age", 0);
+        int age = preferences.getBoolean("isLogin", false);
+    }
+
+    private boolean isLogin() {
+        return false;
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
