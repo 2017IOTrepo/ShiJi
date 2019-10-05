@@ -17,9 +17,10 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidlab.shiji.activity.LoginActivity;
 import com.androidlab.shiji.activity.SideMenu.SlideSetting;
+import com.androidlab.shiji.activity.SignupActivity;
 import com.androidlab.shiji.bean.User;
-import com.androidlab.shiji.bean.UserIns;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.androidlab.shiji.ui.view.AlertDialog;
 import com.androidlab.shiji.utils.StaticVariable;
@@ -70,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
-    private UserIns user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         //侧滑栏
-        final IProfile profile = new ProfileDrawerItem().withName("史迹").withEmail("https://github.com/DreamMemory001").withIcon(R.drawable.touxiang);
+        final IProfile profile = new ProfileDrawerItem()
+                .withName(User.INSTANCE.Name)
+                .withEmail(User.INSTANCE.Email)
+                .withIcon(R.drawable.touxiang);
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -254,7 +257,9 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("好", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            
+                            // Start the Signup activity
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         }
                     })
                     .create()
@@ -265,24 +270,24 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         preferences = getSharedPreferences("data", MODE_PRIVATE);
         editor = preferences.edit();
-        user = User.INSTANCE.getUserIns();
     }
 
     private void save() {
-        editor.putString("Email", user.getEmail());
-        editor.putString("Password", user.getPassword());
+        editor.putString("Name", User.INSTANCE.Name);
+        editor.putString("Email", User.INSTANCE.Email);
+        editor.putString("Password", User.INSTANCE.Password);
         editor.putBoolean("isLogin", StaticVariable.isLogin);
         editor.apply();
     }
 
     private void read() {
-        user.setEmail(preferences.getString("Email", ""));
-        user.setPassword(preferences.getString("Password", ""));
+        User.INSTANCE.Name = preferences.getString("Name", "");
+        User.INSTANCE.Email = preferences.getString("Email", "");
+        User.INSTANCE.Password = preferences.getString("Password", "");
         StaticVariable.isLogin = preferences.getBoolean("isLogin", false);
     }
 
     private void login() {
-
     }
 
     @Override

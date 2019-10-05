@@ -17,6 +17,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -81,5 +87,8 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.2.1")
     implementation("com.squareup.okio:okio:2.4.0")
 
+
     implementation "com.jakewharton:butterknife:6.1.0"
+//    provided "com.jakewharton:butterknife:6.1.0"
+//    annotationProcessor "com.jakewharton:butterknife:6.1.0"
 }
