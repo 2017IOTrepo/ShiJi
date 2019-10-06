@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bookspread_back"
+    >
+
+<!--<ScrollView-->
+    <!--android:id="@+id/sv"-->
+    <!--android:layout_width=""-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:background="#ffffffff"-->
+    <!--&gt;-->
+
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--&gt;-->
+
+
+
+    <!--<com.androidlab.shiji.ui.view.TextViewVertical-->
+        <!--android:id="@+id/tv_BookText"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--textSize="80"-->
+
+
+        <!--/>-->
+    <TextView
+        android:id="@+id/tv_BookText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:layout_margin="40dp"
+        android:textColor="@color/black"
+        android:text="我在东北的看法几百块大部分vhj坚持吧vhjdbfhj发布的时科技不符合可"/>
+
+<!--</ScrollView>-->
+<!--</ScrollView>-->
+</RelativeLayout>
+
+

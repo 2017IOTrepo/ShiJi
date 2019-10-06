@@ -70,6 +70,9 @@ dependencies {
     implementation 'com.github.LillteZheng:ViewPagerHelper:v1.5'
     // Internet request
     implementation 'com.lzy.net:okgo:3.0.4'
+
+    // loadingProcess
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
     //    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.8.1'
     //    implementation   'com.lzy.net:okrx2:2.0.2'
     //    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
