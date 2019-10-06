@@ -89,15 +89,11 @@ dependencies {
     implementation 'com.squareup.okio:okio:2.4.0'
     implementation 'com.jakewharton:butterknife:6.1.0'
     implementation 'com.android.support:multidex:1.0.3'
-    //    implementation("net.sf.json-lib:json-lib:2.4:jdk15") {
-    //        transitive = false // 解决依赖冲突
-    //    }
-    //    provided "com.jakewharton:butterknife:6.1.0"
-    //    annotationProcessor "com.jakewharton:butterknife:6.1.0"
     implementation files('libs/commons-beanutils-1.9.3.jar')
     implementation files('libs/commons-collections.jar')
     implementation files('libs/commons-lang-2.4.jar')
     implementation files('libs/commons-logging-1.1.jar')
     implementation files('libs/ezmorph-1.0.4.jar')
     implementation files('libs/json-lib-2.3-jdk15.jar')
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
 }

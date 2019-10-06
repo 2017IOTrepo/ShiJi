@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp">
+
+<RelativeLayout
+    android:layout_width="120dp"
+    android:layout_height="190dp">
+
+    <ImageView
+        android:id="@+id/iv_book_spread"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:src="@drawable/shiji"/>
+
+    <TextView
+        android:id="@+id/tv_book_spread"
+       android:layout_marginTop="160dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:text="《史记》"/>
+
+
+</RelativeLayout>
+</RelativeLayout>

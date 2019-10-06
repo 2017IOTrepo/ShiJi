@@ -4,6 +4,7 @@ package com.androidlab.shiji.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.androidlab.shiji.R;
+import com.androidlab.shiji.bean.KeyWords;
 import com.tangguna.searchbox.library.cache.HistoryCache;
 import com.tangguna.searchbox.library.callback.onSearchCallBackListener;
 import com.tangguna.searchbox.library.widget.SearchLayout;
@@ -25,12 +27,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
+
 public class Search_Intent_Activity extends AppCompatActivity {
 
     private SearchLayout searchLayout;
 
     private EditText search_edit;
-    //private RecognizerDialog iatDialog;
+
+
+    private KeyWords keyWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +44,6 @@ public class Search_Intent_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_intent_search);
         searchLayout = findViewById(R.id.searchlayout);
         search_edit = findViewById(R.id.et_searchtext_search);
-
 
         ActionBar mActionBar=getSupportActionBar();
         mActionBar.setHomeButtonEnabled(true);
@@ -57,9 +62,12 @@ public class Search_Intent_Activity extends AppCompatActivity {
             @Override
             public void Search(String str) {
                 //进行或联网搜索
+
+                keyWords = new KeyWords();
                 Log.e("点击",str.toString());
                 Bundle bundle = new Bundle();
                 bundle.putString("data",str);
+                keyWords.setKeyword(str);
                 startActivity(Search_Item_Activity.class,bundle);
             }
             @Override
@@ -82,11 +90,28 @@ public class Search_Intent_Activity extends AppCompatActivity {
         },1);
     }
 
+
+
     public void startActivity(Class<?> openClass, Bundle bundle) {
-        Intent intent = new Intent(this,openClass);
+        final Intent intent = new Intent(this,openClass);
         if (null != bundle)
             intent.putExtras(bundle);
-        startActivity(intent);
+
+
+        new SpotsDialog.Builder()
+                .setContext(this)
+                .setMessage("正在查询中")
+                .build()
+                .show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(intent);
+                finish();
+
+            }
+        },2000);
+
     }
 
 
