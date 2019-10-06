@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +24,11 @@ import com.androidlab.shiji.activity.SignupActivity;
 import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.androidlab.shiji.ui.view.AlertDialog;
+import com.androidlab.shiji.utils.LoggerUtil;
 import com.androidlab.shiji.utils.StaticVariable;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.typeface.IIcon;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private AlertDialog mDialog;
     private long mExitTime;
+    private IProfile profile;
 
     //private ProgressBar progress_update;
 
@@ -113,9 +117,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //侧滑栏
-        final IProfile profile = new ProfileDrawerItem()
+        profile = new ProfileDrawerItem()
                 .withName(User.INSTANCE.Name)
                 .withEmail(User.INSTANCE.Email)
                 .withIcon(R.drawable.touxiang);
@@ -148,13 +151,12 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.side_star).withDescription("查看您的收藏内容").withIcon(MaterialDesignIconic.Icon.gmi_airplane).withIdentifier(4),
 
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.side_about).withIcon(FontAwesome.Icon.faw_user_secret).withIdentifier(5).withSelectable(false)
+                        new SecondaryDrawerItem().withName(R.string.change_account).withIcon(FontAwesome.Icon.faw_user_md).withIdentifier(5).withSelectable(false),
+                        new SecondaryDrawerItem().withName(R.string.side_about).withIcon(FontAwesome.Icon.faw_user_secret).withIdentifier(6).withSelectable(false)
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
-
                         if (drawerItem.getIdentifier() == 1) {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
@@ -191,6 +193,10 @@ public class MainActivity extends AppCompatActivity {
 
                             return true;
                         } else if (drawerItem.getIdentifier() == 5) {
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            return true;
+                        } else if (drawerItem.getIdentifier() == 6) {
 //                            new LibsBuilder()
 //                                    .withFields(R.string.class.getFields())
 //                                    .withActivityStyle(Libs.ActivityStyle.DARK)
@@ -249,21 +255,29 @@ public class MainActivity extends AppCompatActivity {
         init();
         read();
         if (StaticVariable.isLogin) {
-            save();
+            setProfile();
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("注意")
-                    .setMessage("检测到你没有注册 请现在注册")
+                    .setMessage("检测到你没有登录 请现在登录")
                     .setPositiveButton("好", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Start the Signup activity
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivity(intent);
+                            startActivityForResult(intent, 1);
                         }
                     })
                     .create()
                     .show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
+        if (resultCode == RESULT_OK) {
+            save();
         }
     }
 
@@ -287,9 +301,6 @@ public class MainActivity extends AppCompatActivity {
         StaticVariable.isLogin = preferences.getBoolean("isLogin", false);
     }
 
-    private void login() {
-    }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         //判断用户是否点击了“返回键”
@@ -309,5 +320,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void setProfile() {
+        profile.withName(User.INSTANCE.Name);
+        profile.withEmail(User.INSTANCE.Email);
+        headerResult.updateProfile(profile);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProfile();
+    }
 }
 

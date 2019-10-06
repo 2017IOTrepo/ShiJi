@@ -199,6 +199,7 @@
     <string name="logout">退出登录</string>
     <string name="news_notice">新消息提醒</string>
     <string name="chat">聊天</string>
+    <string name="change_account">更换账户</string>
 
 
 </resources>

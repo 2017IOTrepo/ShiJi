@@ -6,10 +6,6 @@ package com.androidlab.shiji.bean;
  * */
 public enum User {
     INSTANCE;
-    User(){
-        Name = "请注册!";
-        Email = "null";
-    }
     public byte Id; // 这里用byte代替uint
     public String Email;
     public String Name;

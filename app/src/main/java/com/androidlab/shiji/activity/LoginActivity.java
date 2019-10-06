@@ -14,9 +14,22 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import com.androidlab.shiji.R;
+import com.androidlab.shiji.bean.Msg;
 import com.androidlab.shiji.bean.User;
+import com.androidlab.shiji.utils.StaticVariable;
+import com.androidlab.shiji.utils.WebUtils;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -71,17 +84,64 @@ public class LoginActivity extends AppCompatActivity {
         String email = mEmailText.getText().toString();
         String password = mPasswordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+        OkHttpClient client = new OkHttpClient();
+        // 这里就不加密传输了
+        client.newCall(new Request.Builder()
+                .url("http://39.105.110.28:8000/user/register")
+                .post(new FormBody.Builder()
+                        .add("Email", email)
+                        .add("Password", password)
+                        .build())
+                .build())
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        onLoginFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onLoginFailed();
+                                    progressDialog.dismiss();
+                                }
+                            });
+                            return;
+                        }
+
+                        Msg msg = WebUtils.msgGetter(response.body().string());
+                        if (msg.code != 0) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    onLoginFailed();
+                                    progressDialog.dismiss();
+                                }
+                            });
+                        }
+
+                        User.INSTANCE.Id = (byte) msg.data.getInt("Id");
+                        User.INSTANCE.Name = msg.data.getString("Name");
+                        User.INSTANCE.Email = msg.data.getString("Email");
+                        User.INSTANCE.Password = msg.data.getString("Password");
+                        StaticVariable.isLogin = true;
+
+                        setResult(RESULT_OK, null);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onLoginSuccess();
+                                progressDialog.dismiss();
+                            }
+                        });
+
+                    }
+                });
     }
 
 
@@ -91,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
+                setResult(RESULT_OK, null);
                 this.finish();
             }
         }
@@ -99,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // disable going back to the MainActivity
-        moveTaskToBack(true);
+        super.onBackPressed();
     }
 
     public void onLoginSuccess() {
