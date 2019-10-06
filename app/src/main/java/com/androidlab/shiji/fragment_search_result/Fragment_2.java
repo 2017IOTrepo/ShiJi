@@ -30,8 +30,6 @@ public class Fragment_2 extends Fragment {
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         view = inflater.inflate(R.layout.fragment_2, container,false);
-
-
         return view;
     }
 }

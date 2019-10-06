@@ -6,14 +6,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.androidlab.shiji.fragment_search_result.Fragment_1;
 import com.androidlab.shiji.fragment_search_result.Fragment_2;
-import com.androidlab.shiji.fragment_search_result.Fragment_3;
+import com.androidlab.shiji.fragment_search_result.Fragment_BookSpread;
 
 public class SearchItemResultAdapter extends FragmentPagerAdapter {
     private int size;
+    private String keyword;
 
-    public SearchItemResultAdapter(FragmentManager fm, int size) {
+    public SearchItemResultAdapter(FragmentManager fm, int size, String keyword) {
         super(fm);
         this.size = size;
+        this.keyword = keyword;
     }
 
     @Override
@@ -24,7 +26,8 @@ public class SearchItemResultAdapter extends FragmentPagerAdapter {
             case 1:
                 return Fragment_2.newInstance();
             case 2:
-                return Fragment_3.newInstance();
+
+                return Fragment_BookSpread.newInstance(keyword);
 //            case 3:
 //                return Fragment4.newInstance();
             default:

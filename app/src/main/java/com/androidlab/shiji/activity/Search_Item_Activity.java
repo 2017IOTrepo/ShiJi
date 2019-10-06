@@ -1,14 +1,18 @@
 package com.androidlab.shiji.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.ui.adapter.SearchItemResultAdapter;
 import com.androidlab.shiji.ui.utils.SpecialTab;
 import com.androidlab.shiji.ui.utils.SpecialTabRound;
+
+import java.net.Inet4Address;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
@@ -16,11 +20,24 @@ import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
 
 public class Search_Item_Activity extends AppCompatActivity{
 
+<<<<<<< HEAD
+=======
+
+    private String keyword;
+>>>>>>> chao
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
+<<<<<<< HEAD
+=======
+
+        Intent i = getIntent();
+        keyword = i.getStringExtra("data");
+        Log.i("kkkkkk", "onCreate: "+keyword);
+
+>>>>>>> chao
         PageNavigationView tab = findViewById(R.id.tab);
 
         NavigationController navigationController = tab.custom()
@@ -30,7 +47,7 @@ public class Search_Item_Activity extends AppCompatActivity{
                 .build();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(new SearchItemResultAdapter(getSupportFragmentManager(),navigationController.getItemCount()));
+        viewPager.setAdapter(new SearchItemResultAdapter(getSupportFragmentManager(),navigationController.getItemCount(), keyword));
 
         //自动适配ViewPager页面切换
         navigationController.setupWithViewPager(viewPager);
