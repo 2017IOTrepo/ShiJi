@@ -113,7 +113,7 @@ public class Sci_Book extends AppCompatActivity {
                 Log.e("DoitemClick", "onItemClick: " );
                 final String BookName = list.get(position).getBook_Title();
                 createFolder();
-//                CopyAssets();
+                CopyAssets();
                 // 使用Handler进行延时  并返回主线程
                 progressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {

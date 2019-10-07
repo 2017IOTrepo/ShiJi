@@ -10,7 +10,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
     <string name="tab0">中国为区域位于东亚的一个国家之统称。“中国”-一词最早见于西周，最初指以洛阳盆地为中心的中原地区，与四夷相对，后范围逐渐扩大至整个华北、南方，和东北、新疆、藏等。1689年，清朝与俄国签订的《尼布楚条约》中，首次将“中国”作为正式国号使用。“中国”一词如果是指涉一个主权国家的话现今主要是指中华人民共和国。</string>
 
     <string name="tab1"> 夏朝(约前2070-前1600)是中国史书中记载的第一个世袭制朝代。根据史书记载，公元前2070，禹建立夏朝，并传位于子启，改变了原始部落的禅让制，开创中国近四千年世袭的先河。夏族的十一支姒姓部落与夏后氏中央王室在血缘上有宗法关系，政治，上有分封关系，经济上有贡赋关系，大致构成夏王朝的核心领土范围。夏西起河南省西部、山西省南部，东至河南省、山东省和河北省三省交界处，南达湖北省北部，北及河北省南部。这个区域的地理中心是今河南偃师、登封、新密、禹州一带。一般认为，夏朝共传十四代，十七后(夏朝统治者在位时称”后”，去世后称”帝“)，延续约471年  为商朝所灭。后人常以“华夏”自称，使之成为中国的代名词。</string>
@@ -114,17 +113,6 @@
     <string name="top78">人类历史上的第一张黑洞照片（2019年）</string>
 
 
-
-
-
-
-
-
-
-
-
-
-
     <string name="desc1">旧石器时代是时期时代的早期阶段。旧石器时代的人类通常以原始族群的形式聚居在一起，并通过收集植物和猎取野生动物为生。</string>
     <string name="desc2">是石器时代的最后一个阶段，以磨制石器和制造陶器为主。</string>
     <string name="desc3">象形符号是既有象形画意又有定义且能依定义作文的符号。部分汉字和罗马字母由象形文字起源。</string>
@@ -206,8 +194,6 @@
     <string name="desc78">北京时间2019年4月10日21时整，天文学家召开全球新闻发布会，宣布首次直接拍摄到的黑洞照片。</string>
 
 
-
-
     <string name="accept_news">安全模式</string>
     <string name="loundspeaker">使用扬声器播放语音</string>
     <string name="shock">震动</string>
@@ -215,27 +201,7 @@
     <string name="logout">退出登录</string>
     <string name="news_notice">新消息提醒</string>
     <string name="chat">聊天</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="change_account">更换账户</string>
 
 
 </resources>

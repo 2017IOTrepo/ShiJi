@@ -87,7 +87,6 @@ public class Fragment_2 extends Fragment {
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_map);
         initRec();
-
         return view;
     }
 
