@@ -2,8 +2,10 @@ package com.androidlab.shiji;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +18,17 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.androidlab.shiji.activity.LoginActivity;
 import com.androidlab.shiji.activity.SideMenu.SlideSetting;
+import com.androidlab.shiji.activity.SignupActivity;
+import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.ui.adapter.MainViewPagerAdapter;
 import com.androidlab.shiji.ui.view.AlertDialog;
+import com.androidlab.shiji.utils.LoggerUtil;
+import com.androidlab.shiji.utils.StaticVariable;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.typeface.IIcon;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -57,11 +65,16 @@ public class MainActivity extends AppCompatActivity {
     private MiniDrawer miniResult = null;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private AlertDialog mDialog;
+    private long mExitTime;
+    private IProfile profile;
 
     //private ProgressBar progress_update;
 
 
     NavigationController mNavigationController;
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         //侧滑栏
-        final IProfile profile = new ProfileDrawerItem().withName("史迹").withEmail("https://github.com/DreamMemory001").withIcon(R.drawable.touxiang);
+        profile = new ProfileDrawerItem()
+                .withName(User.INSTANCE.Name)
+                .withEmail(User.INSTANCE.Email)
+                .withIcon(R.drawable.touxiang);
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -136,13 +151,12 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.side_star).withDescription("查看您的收藏内容").withIcon(MaterialDesignIconic.Icon.gmi_airplane).withIdentifier(4),
 
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.side_about).withIcon(FontAwesome.Icon.faw_user_secret).withIdentifier(5).withSelectable(false)
+                        new SecondaryDrawerItem().withName(R.string.change_account).withIcon(FontAwesome.Icon.faw_user_md).withIdentifier(5).withSelectable(false),
+                        new SecondaryDrawerItem().withName(R.string.side_about).withIcon(FontAwesome.Icon.faw_user_secret).withIdentifier(6).withSelectable(false)
                 ) // add the items we want to use with our Drawer
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-
-
                         if (drawerItem.getIdentifier() == 1) {
                             Toast.makeText(MainActivity.this, ((Nameable) drawerItem).getName().getText(MainActivity.this), Toast.LENGTH_SHORT).show();
 
@@ -179,6 +193,10 @@ public class MainActivity extends AppCompatActivity {
 
                             return true;
                         } else if (drawerItem.getIdentifier() == 5) {
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            return true;
+                        } else if (drawerItem.getIdentifier() == 6) {
 //                            new LibsBuilder()
 //                                    .withFields(R.string.class.getFields())
 //                                    .withActivityStyle(Libs.ActivityStyle.DARK)
@@ -233,9 +251,55 @@ public class MainActivity extends AppCompatActivity {
                 //Log.e("CrossfadeDrawerLayout", "crossfade: " + currentSlidePercentage + " - " + slideOffset);
             }
         });
+
+        init();
+        read();
+        if (StaticVariable.isLogin) {
+            setProfile();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle("注意")
+                    .setMessage("检测到你没有登录 请现在登录")
+                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Start the Signup activity
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivityForResult(intent, 1);
+                        }
+                    })
+                    .create()
+                    .show();
+        }
     }
 
-    private long mExitTime;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
+        if (resultCode == RESULT_OK) {
+            save();
+        }
+    }
+
+    private void init() {
+        preferences = getSharedPreferences("data", MODE_PRIVATE);
+        editor = preferences.edit();
+    }
+
+    private void save() {
+        editor.putString("Name", User.INSTANCE.Name);
+        editor.putString("Email", User.INSTANCE.Email);
+        editor.putString("Password", User.INSTANCE.Password);
+        editor.putBoolean("isLogin", StaticVariable.isLogin);
+        editor.apply();
+    }
+
+    private void read() {
+        User.INSTANCE.Name = preferences.getString("Name", "");
+        User.INSTANCE.Email = preferences.getString("Email", "");
+        User.INSTANCE.Password = preferences.getString("Password", "");
+        StaticVariable.isLogin = preferences.getBoolean("isLogin", false);
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -256,5 +320,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void setProfile() {
+        profile.withName(User.INSTANCE.Name);
+        profile.withEmail(User.INSTANCE.Email);
+        headerResult.updateProfile(profile);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProfile();
+    }
 }
 

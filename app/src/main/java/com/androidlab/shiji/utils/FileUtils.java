@@ -12,9 +12,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class FileUtils extends AppCompatActivity {
-
-
-
     //创建文件夹
     public   void createFolder() {
         //新建一个File，传入文件夹目录
@@ -27,7 +24,6 @@ public class FileUtils extends AppCompatActivity {
 
         }
     }
-
 
     public  void CopyAssets(){
         String newPath = Environment.getExternalStorageDirectory() + "/a";

@@ -19,25 +19,14 @@ import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
 
 public class Search_Item_Activity extends AppCompatActivity{
-
-<<<<<<< HEAD
-=======
-
     private String keyword;
->>>>>>> chao
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
-
-<<<<<<< HEAD
-=======
-
         Intent i = getIntent();
         keyword = i.getStringExtra("data");
         Log.i("kkkkkk", "onCreate: "+keyword);
-
->>>>>>> chao
         PageNavigationView tab = findViewById(R.id.tab);
 
         NavigationController navigationController = tab.custom()
