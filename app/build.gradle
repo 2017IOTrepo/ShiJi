@@ -96,4 +96,8 @@ dependencies {
     implementation files('libs/ezmorph-1.0.4.jar')
     implementation files('libs/json-lib-2.3-jdk15.jar')
     implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation files('libs/kotlin-stdlib-common-1.3.50-sources.jar')
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.50"
+
+
 }
