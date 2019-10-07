@@ -26,8 +26,6 @@ public class Book_Spread_Detail extends AppCompatActivity {
     private String BookText;
     private String keyword = "是";
 
-    private int i = 0;
-
 
 //    private TextViewVertical tv_BookText;
 
