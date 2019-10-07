@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.fragment_tab.Fragment2;
 import com.androidlab.shiji.fragment_tab.Fragment_Popular_Science;
-
+//词向量
 public class Fragment_1  extends Fragment{
 
      private View view;

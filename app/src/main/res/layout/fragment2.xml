@@ -52,7 +52,7 @@
             <LinearLayout
                 android:id="@+id/layout_Dynasty"
                 android:orientation="vertical"
-                android:background="#d9d9d9"
+                android:background="#ffffff"
                 android:layout_weight="4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

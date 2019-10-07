@@ -18,7 +18,7 @@ import com.androidlab.shiji.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+//古籍分布
 public class Fragment_3 extends Fragment {
     private View view;
 
