@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
+//        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
         if (resultCode == RESULT_OK) {
             save();
         }
