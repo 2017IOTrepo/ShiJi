@@ -135,7 +135,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
 
-                        User.INSTANCE.Id = (byte) msg.data.getInt("Id");
+                        User.INSTANCE.Id = msg.data.getInt("Id");
                         User.INSTANCE.Name = msg.data.getString("Name");
                         User.INSTANCE.Email = msg.data.getString("Email");
                         User.INSTANCE.Password = msg.data.getString("Password");

@@ -35,10 +35,14 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
-    @InjectView(R.id.input_email) EditText mEmailText;
-    @InjectView(R.id.input_password) EditText mPasswordText;
-    @InjectView(R.id.btn_login) Button mLoginButton;
-    @InjectView(R.id.link_signup) TextView mSignupLink;
+    @InjectView(R.id.input_email)
+    EditText mEmailText;
+    @InjectView(R.id.input_password)
+    EditText mPasswordText;
+    @InjectView(R.id.btn_login)
+    Button mLoginButton;
+    @InjectView(R.id.link_signup)
+    TextView mSignupLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -124,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }
 
-                        User.INSTANCE.Id = (byte) msg.data.getInt("Id");
+                        User.INSTANCE.Id = msg.data.getInt("Id");
                         User.INSTANCE.Name = msg.data.getString("Name");
                         User.INSTANCE.Email = msg.data.getString("Email");
                         User.INSTANCE.Password = msg.data.getString("Password");
