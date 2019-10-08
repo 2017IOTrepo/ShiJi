@@ -46,15 +46,11 @@ public class SignupActivity extends AppCompatActivity {
     @InjectView(R.id.link_login)
     TextView mLoginLink;
 
-    private Gson gson;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.inject(this);
-        gson = new Gson();
-
 
         mSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +131,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
 
-                        User.INSTANCE.Id = (byte) msg.data.getInt("Id");
+                        User.INSTANCE.Id = msg.data.getInt("Id");
                         User.INSTANCE.Name = msg.data.getString("Name");
                         User.INSTANCE.Email = msg.data.getString("Email");
                         User.INSTANCE.Password = msg.data.getString("Password");

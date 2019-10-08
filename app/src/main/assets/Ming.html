@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=litwTUbYUu77A3O8dTIZU5zBvCNnM58h"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+
+function renderItemHai(params, api) {
+    var coords = [
+    [
+              108.67675781249999,
+              19.37334071336406
+            ],
+            [
+              108.6328125,
+              19.20742852680121
+            ],
+            [
+              108.61083984375,
+              18.93746442964186
+            ],
+            [
+              108.61083984375,
+              18.6670631919266
+            ],
+            [
+              108.69873046875,
+              18.47960905583197
+            ],
+            [
+              108.87451171875,
+              18.417078658661257
+            ],
+            [
+              109.22607421875,
+              18.25021997706561
+            ],
+            [
+              109.44580078125,
+              18.166730410221938
+            ],
+            [
+              109.66552734375,
+              18.396230138028827
+            ],
+            [
+              110.06103515625,
+              18.417078658661257
+            ],
+            [
+              110.23681640625,
+              18.58377568837094
+            ],
+            [
+              110.41259765625,
+              18.625424540701264
+            ],
+            [
+              110.5224609375,
+              18.8335153964335
+            ],
+            [
+              110.56640625,
+              19.08288436934017
+            ],
+            [
+              110.74218749999999,
+              19.290405639497994
+            ],
+            [
+              110.85205078124999,
+              19.435514339097825
+            ],
+            [
+              111.02783203125,
+              19.621892180319374
+            ],
+            [
+              111.0498046875,
+              19.84939395842279
+            ],
+            [
+              110.98388671874999,
+              19.993998469485504
+            ],
+            [
+              110.67626953125,
+              20.159098270646936
+            ],
+            [
+              110.5224609375,
+              20.076570104545173
+            ],
+            [
+              110.28076171875,
+              20.097206227083888
+            ],
+            [
+              110.0830078125,
+              20.035289711352377
+            ],
+            [
+              109.84130859375,
+              19.993998469485504
+            ],
+            [
+              109.70947265625,
+              20.097206227083888
+            ],
+            [
+              109.53369140625,
+              19.84939395842279
+            ],
+            [
+              109.248046875,
+              19.932041306115536
+            ],
+            [
+              109.1162109375,
+              19.84939395842279
+            ],
+            [
+              109.248046875,
+              19.746024239625427
+            ],
+            [
+              109.1162109375,
+              19.663280219987662
+            ],
+            [
+              108.67675781249999,
+              19.37334071336406
+            ]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+
+function renderItemTai(params, api) {
+    var coords = [
+    [
+              120.0146484375,
+              23.039297747769726
+            ],
+            [
+              120.1904296875,
+              22.755920681486405
+            ],
+            [
+              120.41015624999999,
+              22.411028521558706
+            ],
+            [
+              120.5419921875,
+              22.30942584120019
+            ],
+            [
+              120.76171875,
+              22.024545601240337
+            ],
+            [
+              120.87158203125,
+              22.268764039073968
+            ],
+            [
+              121.06933593749999,
+              22.63429269379353
+            ],
+            [
+              121.28906250000001,
+              22.978623970384913
+            ],
+            [
+              121.4208984375,
+              23.28171917560002
+            ],
+            [
+              121.59667968749999,
+              23.765236889758672
+            ],
+            [
+              121.728515625,
+              24.186847428521244
+            ],
+            [
+              121.86035156249999,
+              24.56710835257599
+            ],
+            [
+              121.86035156249999,
+              24.826624956562167
+            ],
+            [
+              122.03613281249999,
+              25.045792240303445
+            ],
+            [
+              121.904296875,
+              25.16517336866393
+            ],
+            [
+              121.6845703125,
+              25.304303764403617
+            ],
+            [
+              121.5087890625,
+              25.224820176765036
+            ],
+            [
+              121.31103515625,
+              25.12539261151203
+            ],
+            [
+              121.09130859375,
+              24.986058021167594
+            ],
+            [
+              120.91552734375,
+              24.746831298412058
+            ],
+            [
+              120.52001953124999,
+              24.387127324604496
+            ],
+            [
+              120.38818359375,
+              24.00632619875113
+            ],
+            [
+              120.30029296875,
+              23.805449612314625
+            ],
+            [
+              120.16845703125,
+              23.483400654325642
+            ],
+            [
+              120.14648437499999,
+              23.079731762449878
+            ],
+            [
+              120.03662109374999,
+              22.958393318086348
+            ],
+            [
+              120.0146484375,
+              23.039297747769726
+            ]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+
+
+function renderItem(params, api) {
+    var coords = [
+            [
+              124.27734374999999,
+              39.842286020743394
+            ],
+            [
+              124.01367187499999,
+              41.178653972331674
+            ],
+            [
+              123.31054687499999,
+              42.48830197960227
+            ],
+            [
+              121.904296875,
+              42.87596410238256
+            ],
+            [
+              119.267578125,
+              41.244772343082076
+            ],
+            [
+              115.224609375,
+              41.11246878918088
+            ],
+            [
+              112.763671875,
+              40.3130432088809
+            ],
+            [
+              111.181640625,
+              39.16414104768742
+            ],
+            [
+              109.423828125,
+              37.579412513438385
+            ],
+            [
+              107.40234375,
+              37.85750715625203
+            ],
+            [
+              107.666015625,
+              39.095962936305476
+            ],
+            [
+              106.875,
+              39.639537564366684
+            ],
+            [
+              105.29296874999999,
+              38.272688535980976
+            ],
+            [
+              102.12890625,
+              38.75408327579141
+            ],
+            [
+              100.634765625,
+              40.64730356252251
+            ],
+            [
+              99.052734375,
+              41.96765920367816
+            ],
+            [
+              97.646484375,
+              41.31082388091818
+            ],
+            [
+              97.91015624999999,
+              39.16414104768742
+            ],
+            [
+              96.240234375,
+              38.54816542304656
+            ],
+            [
+              96.767578125,
+              37.020098201368114
+            ],
+            [
+              93.07617187499999,
+              37.37015718405753
+            ],
+            [
+              95.625,
+              35.53222622770337
+            ],
+            [
+              92.900390625,
+              35.53222622770337
+            ],
+            [
+              90.3515625,
+              36.1733569352216
+            ],
+            [
+              86.484375,
+              36.4566360115962
+            ],
+            [
+              79.8046875,
+              35.60371874069731
+            ],
+            [
+              75.498046875,
+              35.817813158696616
+            ],
+            [
+              75.05859375,
+              34.88593094075317
+            ],
+            [
+              77.16796875,
+              33.578014746143985
+            ],
+            [
+              78.3984375,
+              31.50362930577303
+            ],
+            [
+              80.33203125,
+              30.600093873550072
+            ],
+            [
+              84.111328125,
+              28.38173504322308
+            ],
+            [
+              87.71484375,
+              27.994401411046148
+            ],
+            [
+              90.52734374999999,
+              28.07198030177986
+            ],
+            [
+              92.63671875,
+              27.839076094777816
+            ],
+            [
+              95.185546875,
+              28.92163128242129
+            ],
+            [
+              94.74609375,
+              27.21555620902969
+            ],
+            [
+              94.04296874999999,
+              24.84656534821976
+            ],
+            [
+              94.130859375,
+              23.40276490540795
+            ],
+            [
+              96.15234375,
+              24.367113562651262
+            ],
+            [
+              95.80078125,
+              22.755920681486405
+            ],
+            [
+              98.173828125,
+              19.72534224805787
+            ],
+            [
+              101.18408203124999,
+              21.350781150679737
+            ],
+            [
+              101.8212890625,
+              21.207458730482642
+            ],
+            [
+              101.7333984375,
+              22.28909641872304
+            ],
+            [
+              102.41455078125,
+              22.654571520098994
+            ],
+            [
+              103.68896484375,
+              22.553147478403194
+            ],
+            [
+              104.7216796875,
+              22.51255695405145
+            ],
+            [
+              106.50146484374999,
+              22.28909641872304
+            ],
+            [
+              106.63330078125,
+              22.085639901650328
+            ],
+            [
+              107.0068359375,
+              21.80030805097259
+            ],
+            [
+              107.666015625,
+              21.57571893245848
+            ],
+            [
+              108.08349609375,
+              21.4121622297254
+            ],
+            [
+              108.6328125,
+              21.616579336740603
+            ],
+            [
+              108.9404296875,
+              21.391704731036587
+            ],
+            [
+              109.35791015625,
+              21.53484700204879
+            ],
+            [
+              109.8193359375,
+              21.47351753334985
+            ],
+            [
+              109.6875,
+              21.207458730482642
+            ],
+            [
+              109.79736328125,
+              20.673905264672843
+            ],
+            [
+              109.86328125,
+              20.282808691330054
+            ],
+            [
+              110.36865234374999,
+              20.2209657795223
+            ],
+            [
+              110.478515625,
+              20.52993312517078
+            ],
+            [
+              110.32470703125,
+              20.899871347076424
+            ],
+            [
+              110.74218749999999,
+              21.207458730482642
+            ],
+            [
+              112.587890625,
+              21.69826549685252
+            ],
+            [
+              113.99414062499999,
+              21.779905342529645
+            ],
+            [
+              116.3671875,
+              22.917922936146045
+            ],
+            [
+              118.125,
+              24.206889622398023
+            ],
+            [
+              119.44335937499999,
+              25.3241665257384
+            ],
+            [
+              120.673828125,
+              27.137368359795584
+            ],
+            [
+              121.728515625,
+              28.536274512989916
+            ],
+            [
+              122.16796875,
+              29.76437737516313
+            ],
+            [
+              121.46484375,
+              30.372875188118016
+            ],
+            [
+              122.25585937500001,
+              31.27855085894653
+            ],
+            [
+              121.640625,
+              32.175612478499325
+            ],
+            [
+              120.234375,
+              33.94335994657882
+            ],
+            [
+              119.35546875000001,
+              35.38904996691167
+            ],
+            [
+              122.51953124999999,
+              37.09023980307208
+            ],
+            [
+              122.08007812499999,
+              37.579412513438385
+            ],
+            [
+              120.498046875,
+              37.50972584293751
+            ],
+            [
+              119.267578125,
+              37.37015718405753
+            ],
+            [
+              119.35546875000001,
+              37.92686760148135
+            ],
+            [
+              118.21289062499999,
+              38.06539235133249
+            ],
+            [
+              117.158203125,
+              38.61687046392973
+            ],
+            [
+              118.125,
+              39.027718840211605
+            ],
+            [
+              119.267578125,
+              39.50404070558415
+            ],
+            [
+              120.32226562500001,
+              40.58058466412761
+            ],
+            [
+              121.640625,
+              40.97989806962013
+            ],
+            [
+              121.81640624999999,
+              40.38002840251183
+            ],
+            [
+              120.84960937499999,
+              39.774769485295465
+            ],
+            [
+              121.201171875,
+              39.095962936305476
+            ],
+            [
+              121.11328124999999,
+              38.47939467327645
+            ],
+            [
+              122.607421875,
+              39.36827914916014
+            ],
+            [
+              124.27734374999999,
+              39.842286020743394
+            ]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+
+option = {
+    backgroundColor: 'transparent',
+    title: {
+        text: '明代地图',
+        left: 'center',
+        textStyle: {
+            color: '#000'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    bmap: {
+        center: [104.114129, 37.550339],
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+            styleJson: [
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#6699CC"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#DDDDDD"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#064f85"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#00508b"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#056197",
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#029fd4"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#1a5787"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    }
+            ]
+        }
+    },
+    series : [
+        {
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItem,
+            itemStyle: {
+                normal: {
+                  color: '#FFC299',
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: -100
+        },
+        {
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItemTai,
+            itemStyle: {
+                normal: {
+                  color: '#FFC299',
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: -100
+        },
+        {
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItemHai,
+            itemStyle: {
+                normal: {
+                    color: '#FFC299',
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: -100
+        },
+        {
+            name: '徐渭',
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+            data: [{
+                name: "浙江绍兴人,明代文学家。",
+                value: [120.03,30.558]
+            }],
+            symbol: 'image://https://i.loli.net/2019/09/07/7pksKFGhm4Pt8Nf.png',
+            symbolSize: [30,30],
+            label: {
+                normal: {
+                    formatter: '{a}',
+                    show: true,
+                    position:'bottom'
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                emphasis: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }
+            },
+            z: 10
+        }
+    ]
+};
+
+
+myChart.setOption(option);
+// 获取百度地图实例，使用百度地图自带的控件
+var bmap = myChart.getModel().getComponent('bmap').getBMap();
+
+
+bmap.addControl(new BMap.MapTypeControl());
+
+//调用百度的方法，使用bmap对象
+	var point = new BMap.Point(106.404, 39.915);
+	bmap.centerAndZoom(point, 1);
+
+var point1 = new BMap.Point(110.404, 34.915);
+  var opts = {
+      position: point1,    // 指定文本标注所在的地理位置
+      offset: new BMap.Size(0, 0),    //设置文本偏移量
+  }
+  var label = new BMap.Label("明", opts, {
+    offset: new BMap.Size(0, 0)
+  });  // 创建文本标注对象
+label.setStyle({
+    color: "rad",
+    backgroundColor: 'transparent',//文本背景色
+    borderColor: 'transparent',//文本框边框色
+    fontSize: "19px",
+    height: "20px",
+    lineHeight: "20px",
+    fontFamily: "微软雅黑"
+});
+bmap.addOverlay(label);
+
+</script>
+</body>
+</html>

@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
+//        LoggerUtil.showToastLong(MainActivity.this, String.valueOf(resultCode));
         if (resultCode == RESULT_OK) {
             save();
         }
@@ -287,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void save() {
+        editor.putInt("Id", User.INSTANCE.Id);
         editor.putString("Name", User.INSTANCE.Name);
         editor.putString("Email", User.INSTANCE.Email);
         editor.putString("Password", User.INSTANCE.Password);
@@ -295,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void read() {
+        User.INSTANCE.Id = preferences.getInt("Id", 0);
         User.INSTANCE.Name = preferences.getString("Name", "");
         User.INSTANCE.Email = preferences.getString("Email", "");
         User.INSTANCE.Password = preferences.getString("Password", "");

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=litwTUbYUu77A3O8dTIZU5zBvCNnM58h"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+
+
+function renderItem(params, api) {
+    var coords = [
+    [
+              107.666015625,
+              34.45221847282654
+            ],
+            [
+              107.20458984375,
+              34.379712580462204
+            ],
+            [
+              107.05078125,
+              33.65120829920497
+            ],
+            [
+              108.91845703124999,
+              33.52307880890422
+            ],
+            [
+              110.74218749999999,
+              33.925129700072
+            ],
+            [
+              112.08251953125,
+              33.779147331286474
+            ],
+            [
+              113.203125,
+              33.063924198120645
+            ],
+            [
+              114.6533203125,
+              33.687781758439364
+            ],
+            [
+              117.57568359374999,
+              34.07086232376631
+            ],
+            [
+              118.01513671875,
+              34.70549341022544
+            ],
+            [
+              118.125,
+              35.47856499535729
+            ],
+            [
+              116.96044921875,
+              35.97800618085566
+            ],
+            [
+              114.60937499999999,
+              36.73888412439431
+            ],
+            [
+              113.203125,
+              37.3002752813443
+            ],
+            [
+              111.70898437499999,
+              36.94989178681327
+            ],
+            [
+              111.26953125,
+              35.817813158696616
+            ],
+            [
+              107.666015625,
+              34.45221847282654
+            ]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+
+
+option = {
+    backgroundColor: 'transparent',
+    title: {
+        text: '夏朝地图',
+        left: 'center',
+        textStyle: {
+            color: '#000'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    bmap: {
+        center: [104.114129, 37.550339],
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+            styleJson: [
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#6699CC"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#DDDDDD"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#064f85"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#00508b"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#056197",
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#029fd4"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#1a5787"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    }
+            ]
+        }
+    },
+    series : [  
+    {
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItem,
+            itemStyle: {
+                normal: {
+                  color: '#FFC299',
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: -100
+        },
+    ]
+};
+
+
+myChart.setOption(option);
+// 获取百度地图实例，使用百度地图自带的控件
+var bmap = myChart.getModel().getComponent('bmap').getBMap();
+
+
+bmap.addControl(new BMap.MapTypeControl());
+
+//调用百度的方法，使用bmap对象
+	var point = new BMap.Point(106.404, 39.915);
+	bmap.centerAndZoom(point, 1);
+
+var point1 = new BMap.Point(112.404, 36.915);
+  var opts = {
+      position: point1,    // 指定文本标注所在的地理位置
+      offset: new BMap.Size(0, 0),    //设置文本偏移量
+  }
+  var label = new BMap.Label("夏朝", opts, {
+    offset: new BMap.Size(0, 0)
+  });  // 创建文本标注对象
+label.setStyle({
+    color: "rad",
+    backgroundColor: 'transparent',//文本背景色
+    borderColor: 'transparent',//文本框边框色
+    fontSize: "19px",
+    height: "20px",
+    lineHeight: "20px",
+    fontFamily: "微软雅黑"
+});
+bmap.addOverlay(label);
+
+</script>
+</body>
+</html>

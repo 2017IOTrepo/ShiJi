@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+    <declare-styleable name="TintableImageView">
+        <attr name="tint_f" format="reference|color"/>
+    </declare-styleable>
+
     <declare-styleable name="DashView">
         <attr name="dashWidth" format="dimension"/>
         <attr name="lineWidth" format="dimension"/>
@@ -54,7 +59,6 @@
         <attr name="centerScale" format="float"/>
         <attr name="moveSpeed" format="float"/>
     </declare-styleable>
-
 
 
 
