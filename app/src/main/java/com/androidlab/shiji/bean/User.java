@@ -6,7 +6,7 @@ package com.androidlab.shiji.bean;
  * */
 public enum User {
     INSTANCE;
-    public byte Id; // 这里用byte代替uint
+    public int Id; // 这里用byte代替uint
     public String Email;
     public String Name;
     public String Password;

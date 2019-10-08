@@ -18,6 +18,7 @@ import com.androidlab.shiji.R;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 //古籍分布
 public class Fragment_3 extends Fragment {
     private View view;
@@ -30,22 +31,17 @@ public class Fragment_3 extends Fragment {
     }
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN |
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        view = inflater.inflate(R.layout.fragment_3, container,false);
+        view = inflater.inflate(R.layout.fragment_3, container, false);
 
 
         return view;
     }
-
-
-
-
 
 
     /**
@@ -56,19 +52,16 @@ public class Fragment_3 extends Fragment {
         /**
          * 关键字高亮变色
          *
-         * @param color
-         *            变化的色值
-         * @param text
-         *            文字
-         * @param keyword
-         *            文字中的关键字
+         * @param color   变化的色值
+         * @param text    文字
+         * @param keyword 文字中的关键字
          * @return 结果SpannableString
          */
         public static SpannableString matcherSearchTitle(int color, String text, String keyword) {
             SpannableString s = new SpannableString(text);
-            keyword=escapeExprSpecialWord(keyword);
-            text=escapeExprSpecialWord(text);
-            if (text.contains(keyword)&&!TextUtils.isEmpty(keyword)){
+            keyword = escapeExprSpecialWord(keyword);
+            text = escapeExprSpecialWord(text);
+            if (text.contains(keyword) && !TextUtils.isEmpty(keyword)) {
                 try {
                     Pattern p = Pattern.compile(keyword);
                     Matcher m = p.matcher(s);
@@ -77,8 +70,8 @@ public class Fragment_3 extends Fragment {
                         int end = m.end();
                         s.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     }
-                }catch (Exception e){
-                    Log.e("Result_Fragment_3", "matcherSearchTitle: "+e.toString());
+                } catch (Exception e) {
+                    Log.e("Result_Fragment_3", "matcherSearchTitle: " + e.toString());
                 }
             }
             return s;
@@ -92,7 +85,7 @@ public class Fragment_3 extends Fragment {
          */
         public static String escapeExprSpecialWord(String keyword) {
             if (!TextUtils.isEmpty(keyword)) {
-                String[] fbsArr = { "\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|" };
+                String[] fbsArr = {"\\", "$", "(", ")", "*", "+", ".", "[", "]", "?", "^", "{", "}", "|"};
                 for (String key : fbsArr) {
                     if (keyword.contains(key)) {
                         keyword = keyword.replace(key, "\\" + key);
