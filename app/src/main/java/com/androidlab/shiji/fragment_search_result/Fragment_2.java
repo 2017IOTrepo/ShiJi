@@ -67,7 +67,7 @@ public class Fragment_2 extends Fragment {
         searchMap.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         searchMap.getSettings().setSupportZoom(true);
         searchMap.getSettings().setDisplayZoomControls(true);
-        searchMap.loadUrl("file:///android_asset/test.html");
+        searchMap.loadUrl("file:///android_asset/aMaptest.html");
 
         /**
          * js方法的调用必须在html页面加载完成之后才能调用。
