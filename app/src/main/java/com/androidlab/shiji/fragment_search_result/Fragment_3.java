@@ -38,11 +38,8 @@ public class Fragment_3 extends Fragment {
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         view = inflater.inflate(R.layout.fragment_3, container, false);
-
-
         return view;
     }
-
 
     /**
      * 文字变色工具类

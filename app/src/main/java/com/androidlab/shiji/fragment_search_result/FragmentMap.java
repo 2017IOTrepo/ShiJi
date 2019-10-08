@@ -93,10 +93,10 @@ public class FragmentMap extends Fragment {
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
 //设置Adapter
         List<MapContent> datas = new ArrayList<>();
-        datas.add(new MapContent(R.drawable.num1, R.drawable.nalan, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num2, R.drawable.nalan, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num3, R.drawable.nalan, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num4, R.drawable.nalan, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
+        datas.add(new MapContent(R.drawable.num1, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
+        datas.add(new MapContent(R.drawable.num2, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
+        datas.add(new MapContent(R.drawable.num3, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
+        datas.add(new MapContent(R.drawable.num4, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
         MapContentAdapter recycleAdapter = new MapContentAdapter(datas);
         recyclerView.setAdapter(recycleAdapter);
 
