@@ -8,8 +8,6 @@
 
 
 
-
-
    <android.support.v7.widget.CardView
        android:id="@+id/carview1"
        android:layout_width="120dp"

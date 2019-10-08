@@ -7,12 +7,14 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toolbar;
 
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.activity.popular_science.Sci_Dy;
@@ -31,6 +33,8 @@ public class Fragment_Popular_Science extends Fragment {
     private ImageView iv1;
     private ImageView iv2;
     private ImageView iv3;
+
+    private Toolbar toolbar;
 
     public static Fragment_Popular_Science newInstance() {
         Bundle args = new Bundle();
@@ -67,9 +71,9 @@ public class Fragment_Popular_Science extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN |
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         view = inflater.inflate(R.layout.fragment3, container, false);
-
         cardView1 = view.findViewById(R.id.carview1);
         iv1 = view.findViewById(R.id.histroy);
+//        toolbar = view.findViewById(R.id.toolbar);
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
