@@ -1,5 +1,6 @@
 package com.androidlab.shiji.fragment_search_result;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,16 +18,32 @@ import android.view.WindowManager;
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.activity.book_spread.Book_Spread_Detail;
 import com.androidlab.shiji.bean.Book_Spread;
+import com.androidlab.shiji.bean.Msg;
+import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.ui.adapter.BookSpreadRecyclerView_Adapater;
+import com.androidlab.shiji.utils.WebUtils;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import dmax.dialog.SpotsDialog;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Fragment_BookSpread extends Fragment {
     private View view;
     private RecyclerView rc_bookSpread;
     private BookSpreadRecyclerView_Adapater adapater;
     private List<Book_Spread> list;
+    private Map<String, R.drawable> bookFront;
     private static String keyword1;
 
 //    private int i = 0 ;
@@ -48,7 +65,7 @@ public class Fragment_BookSpread extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_3, container, false);
 
-        initData();
+//        initData();
         initRecyclerView(view);
 
         adapater.setOnclick(new BookSpreadRecyclerView_Adapater.ClickInterface() {
@@ -60,6 +77,42 @@ public class Fragment_BookSpread extends Fragment {
                 startActivity(intent);
             }
         });
+
+        AlertDialog dialog = new SpotsDialog.Builder()
+                .setContext(getContext())
+                .setMessage("正在查询中")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+        Bundle bundle = new Bundle();
+
+//        System.out.println("bundle" + bundle.getString("data"));
+
+        OkHttpClient client = new OkHttpClient();
+        // 这里就不加密传输了
+        client.newCall(new Request.Builder()
+                .url("http://39.105.110.28:8000/search/ans")
+                .post(new FormBody.Builder()
+                        //这里写你的关键词
+                        .add("key", "null")
+                        .build())
+                .build())
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                        }
+
+                        Msg msg = WebUtils.msgGetter(response.body().string());
+                        if (msg.code != 0) {
+                        }
+                    }
+                });
+
         return view;
     }
 

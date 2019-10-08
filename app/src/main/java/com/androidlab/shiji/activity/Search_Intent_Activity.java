@@ -19,15 +19,28 @@ import android.widget.Toast;
 
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.bean.KeyWords;
+import com.androidlab.shiji.bean.Msg;
+import com.androidlab.shiji.bean.User;
+import com.androidlab.shiji.utils.StaticVariable;
+import com.androidlab.shiji.utils.WebUtils;
 import com.tangguna.searchbox.library.cache.HistoryCache;
 import com.tangguna.searchbox.library.callback.onSearchCallBackListener;
 import com.tangguna.searchbox.library.widget.SearchLayout;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import dmax.dialog.SpotsDialog;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Search_Intent_Activity extends AppCompatActivity {
 
@@ -45,7 +58,7 @@ public class Search_Intent_Activity extends AppCompatActivity {
         searchLayout = findViewById(R.id.searchlayout);
         search_edit = findViewById(R.id.et_searchtext_search);
 
-        ActionBar mActionBar=getSupportActionBar();
+        ActionBar mActionBar = getSupportActionBar();
         mActionBar.setHomeButtonEnabled(true);
         mActionBar.setDisplayHomeAsUpEnabled(true);
         mActionBar.setTitle("搜索");
@@ -56,20 +69,53 @@ public class Search_Intent_Activity extends AppCompatActivity {
 
     private void initData() {
         List<String> skills = HistoryCache.toArray(getApplicationContext());
-        String shareHotData ="陛下,资治通鉴,史记,三皇五帝";
+        String shareHotData = "陛下,史记,三国志";
         List<String> skillHots = Arrays.asList(shareHotData.split(","));
+
+        // 这里以后再写
+//        OkHttpClient client = new OkHttpClient();
+//        // 这里就不加密传输了
+//        client.newCall(new Request.Builder()
+//                .url("http://39.105.110.28:8000/search/get_history")
+//                .post(new FormBody.Builder()
+//                        .add("Id", String.valueOf(User.INSTANCE.Id))
+//                        .build())
+//                .build())
+//                .enqueue(new Callback() {
+//                    @Override
+//                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+//                    }
+//
+//                    @Override
+//                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                        if (!response.isSuccessful()) {
+//                        }
+//
+//                        Msg msg = WebUtils.msgGetter(response.body().string());
+//                        if (msg.code != 0) {
+//                        }
+//
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                            }
+//                        });
+//
+//                    }
+//                });
+
         searchLayout.initData(skills, skillHots, new onSearchCallBackListener() {
             @Override
             public void Search(String str) {
                 //进行或联网搜索
-
                 keyWords = new KeyWords();
-                Log.e("点击",str.toString());
+                Log.e("点击", str.toString());
                 Bundle bundle = new Bundle();
-                bundle.putString("data",str);
+                bundle.putString("data", str);
                 keyWords.setKeyword(str);
-                startActivity(Search_Item_Activity.class,bundle);
+                startActivity(Search_Item_Activity.class, bundle);
             }
+
             @Override
             public void Back() {
                 finish();
@@ -79,21 +125,21 @@ public class Search_Intent_Activity extends AppCompatActivity {
             public void ClearOldData() {
                 //清除历史搜索记录  更新记录原始数据
                 HistoryCache.clear(getApplicationContext());
-                Log.e("点击","清除数据");
+                Log.e("点击", "清除数据");
             }
+
             @Override
             public void SaveOldData(ArrayList<String> AlloldDataList) {
                 //保存所有的搜索记录
-                HistoryCache.saveHistory(getApplicationContext(),HistoryCache.toJsonArray(AlloldDataList));
-                Log.e("点击","保存数据");
+                HistoryCache.saveHistory(getApplicationContext(), HistoryCache.toJsonArray(AlloldDataList));
+                Log.e("点击", "保存数据");
             }
-        },1);
+        }, 1);
     }
 
 
-
     public void startActivity(Class<?> openClass, Bundle bundle) {
-        final Intent intent = new Intent(this,openClass);
+        final Intent intent = new Intent(this, openClass);
         if (null != bundle)
             intent.putExtras(bundle);
 
@@ -101,6 +147,7 @@ public class Search_Intent_Activity extends AppCompatActivity {
         new SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("正在查询中")
+                .setCancelable(false)
                 .build()
                 .show();
         new Handler().postDelayed(new Runnable() {
@@ -108,9 +155,8 @@ public class Search_Intent_Activity extends AppCompatActivity {
             public void run() {
                 startActivity(intent);
                 finish();
-
             }
-        },2000);
+        }, 2000);
 
     }
 
@@ -126,6 +172,7 @@ public class Search_Intent_Activity extends AppCompatActivity {
                     InputMethodManager.HIDE_IMPLICIT_ONLY);
         }
     }
+
     @Override
     protected void onPause() {
         // TODO Auto-generated method stub

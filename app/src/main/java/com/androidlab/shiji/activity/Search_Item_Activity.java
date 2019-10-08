@@ -8,15 +8,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.androidlab.shiji.R;
+import com.androidlab.shiji.bean.Msg;
+import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.ui.adapter.SearchItemResultAdapter;
 import com.androidlab.shiji.ui.utils.SpecialTab;
 import com.androidlab.shiji.ui.utils.SpecialTabRound;
+import com.androidlab.shiji.utils.WebUtils;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.net.Inet4Address;
 
 import me.majiajie.pagerbottomtabstrip.NavigationController;
 import me.majiajie.pagerbottomtabstrip.PageNavigationView;
 import me.majiajie.pagerbottomtabstrip.item.BaseTabItem;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Search_Item_Activity extends AppCompatActivity{
     private String keyword;

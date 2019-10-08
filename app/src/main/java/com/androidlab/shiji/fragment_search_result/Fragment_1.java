@@ -13,8 +13,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.androidlab.shiji.R;
+import com.androidlab.shiji.bean.Msg;
+import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.fragment_tab.Fragment2;
 import com.androidlab.shiji.fragment_tab.Fragment_Popular_Science;
+import com.androidlab.shiji.utils.WebUtils;
 import com.github.abel533.echarts.Grid;
 import com.github.abel533.echarts.Legend;
 import com.github.abel533.echarts.Title;
@@ -32,8 +35,18 @@ import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Line;
 import com.github.abel533.echarts.style.TextStyle;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 //词向量
 public class Fragment_1 extends Fragment {
@@ -81,6 +94,31 @@ public class Fragment_1 extends Fragment {
                 showTable();
             }
         });
+
+
+        OkHttpClient client = new OkHttpClient();
+        // 这里就不加密传输了
+        client.newCall(new Request.Builder()
+                .url("http://39.105.110.28:8000/search/get_history")
+                .post(new FormBody.Builder()
+                        .add("Id", String.valueOf(User.INSTANCE.Id))
+                        .build())
+                .build())
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                    }
+
+                    @Override
+                    public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                        }
+
+                        Msg msg = WebUtils.msgGetter(response.body().string());
+                        if (msg.code != 0) {
+                        }
+                    }
+                });
 
         return view;
     }
