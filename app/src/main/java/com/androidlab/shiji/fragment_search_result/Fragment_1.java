@@ -99,9 +99,10 @@ public class Fragment_1 extends Fragment {
         OkHttpClient client = new OkHttpClient();
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
-                .url("http://39.105.110.28:8000/search/get_history")
+                .url("http://39.105.110.28:8000/search/vec")
                 .post(new FormBody.Builder()
-                        .add("Id", String.valueOf(User.INSTANCE.Id))
+                        // 这里写关键词
+                        .add("Id", "null")
                         .build())
                 .build())
                 .enqueue(new Callback() {
