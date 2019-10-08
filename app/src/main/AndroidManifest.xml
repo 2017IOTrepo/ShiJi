@@ -67,7 +67,7 @@
         <activity
             android:name=".activity.WebUIActivity"
             android:configChanges="orientation">
-            
+
         </activity>
 
         <activity
