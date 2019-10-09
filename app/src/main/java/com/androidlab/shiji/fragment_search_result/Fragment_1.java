@@ -35,10 +35,14 @@ import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Line;
 import com.github.abel533.echarts.style.TextStyle;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Call;
@@ -54,6 +58,9 @@ public class Fragment_1 extends Fragment {
     private View view;
 
     private WebView search_wordVec;
+
+    private List<Object> xAxis;
+    private List<Object> yAxis;
 
     public static Fragment_1 newInstance() {
         Bundle args = new Bundle();
@@ -77,6 +84,9 @@ public class Fragment_1 extends Fragment {
         search_wordVec.getSettings().setSupportZoom(true);
         search_wordVec.getSettings().setDisplayZoomControls(true);
         search_wordVec.loadUrl("file:///android_asset/aTabletest.html");
+
+        xAxis = new ArrayList<>();
+        yAxis = new ArrayList<>();
 
         /**
          * js方法的调用必须在html页面加载完成之后才能调用。
@@ -102,7 +112,7 @@ public class Fragment_1 extends Fragment {
                 .url("http://39.105.110.28:8000/search/vec")
                 .post(new FormBody.Builder()
                         // 这里写关键词
-                        .add("Id", "null")
+                        .add("Key", "史记")
                         .build())
                 .build())
                 .enqueue(new Callback() {
@@ -113,11 +123,32 @@ public class Fragment_1 extends Fragment {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         if (!response.isSuccessful()) {
+                            return;
                         }
 
-                        Msg msg = WebUtils.msgGetter(response.body().string());
-                        if (msg.code != 0) {
+                        JSONObject jsonObject = JSONObject.fromObject(response.body().string());
+                        int code = jsonObject.getInt("code");
+
+                        if (code != 0) {
+                            return;
                         }
+
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (Object jobj :
+                                jsonArray) {
+                            JSONObject job = JSONObject.fromObject(jobj);
+                            xAxis.add(job.getString("BookName"));
+                            yAxis.add(job.getString("Sums"));
+                        }
+
+//                        showTable();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+//                                search_wordVec.reload();
+                                showTable();
+                            }
+                        });
                     }
                 });
 
@@ -156,14 +187,30 @@ public class Fragment_1 extends Fragment {
         search_wordVec.loadUrl("javascript:loadEcharts("" + option.toString() + "")");
         */
 
-        Object[] xAxis = new Object[]{
-                "三国志", "元史", "北史", "北齐书", "南史", "南齐书", "史记", "后汉书", "周书", "宋书", "宋史", "新五代史", "旧五代史", "旧唐书", "明史", "晋书", "梁书", "汉书", "清史稿", "辽史", "金史", "陈书", "隋书", "魏书"
-        };
-        Object[] yAxis = new Object[]{
-                36, 40, 48, 62, 75, 81, 90, 12, 21, 23,
-                32, 42, 43, 54, 45, 54, 45, 45, 45,
-                12, 23, 23, 23, 12
-        };
+//        Object[] xAxis = new Object[]{
+//                "三国志", "元史", "北史", "北齐书", "南史", "南齐书", "史记", "后汉书", "周书", "宋书", "宋史", "新五代史", "旧五代史", "旧唐书", "明史", "晋书", "梁书", "汉书", "清史稿", "辽史", "金史", "陈书", "隋书", "魏书"
+//        };
+//        Object[] yAxis = new Object[]{
+//                10000, 9234, 9023, 8934, 8212, 8023, 7133, 7012, 6976, 6767,
+//                6490, 6080, 5012, 5013, 4011, 4000, 3911, 3800, 3200,
+//                3200, 3100, 3000, 2999, 2988
+//        };
+
+
+        Object[] xAxisArray = new String[xAxis.size()];
+
+        //使用for循环得到数组
+        for (int i = 0; i < xAxis.size(); i++) {
+            xAxisArray[i] = xAxis.get(i);
+        }
+
+        Object[] yAxisArray = new String[yAxis.size()];
+
+        //使用for循环得到数组
+        for (int i = 0; i < yAxis.size(); i++) {
+            yAxisArray[i] = yAxis.get(i);
+        }
+
         GsonOption option = new GsonOption();
         Title title = new Title();
         title.setText("史记词向量结果");
@@ -187,7 +234,7 @@ public class Fragment_1 extends Fragment {
         CategoryAxis categorxAxis = new CategoryAxis();
         categorxAxis.axisLine().onZero(false);
         categorxAxis.boundaryGap(true);
-        categorxAxis.data(xAxis);
+        categorxAxis.data(xAxisArray);
         AxisLabel axisLabel = new AxisLabel();
         TextStyle textStyle = new TextStyle();
         textStyle.fontWeight("bold");
@@ -197,7 +244,7 @@ public class Fragment_1 extends Fragment {
         option.yAxis(categorxAxis);
 
         Bar bar = new Bar();
-        bar.name("词数量(个)").data(yAxis).barWidth(new Integer(30));
+        bar.name("词数量(个)").data(yAxisArray).barWidth(new Integer(30));
         option.series(bar);
 
         search_wordVec.loadUrl("javascript:loadEcharts('" + option.toString() + "')");
