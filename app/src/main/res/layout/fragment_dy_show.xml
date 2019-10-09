@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginTop="10dp"
     tools:context="MainActivity"
+
     >
     <!--<android.support.v7.widget.RecyclerView-->
     <!--android:id="@+id/fragment_list_rv"-->
@@ -22,6 +23,7 @@
         app:cardElevation="3px"
         app:cardUseCompatPadding="false"
         android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
 
 
         >

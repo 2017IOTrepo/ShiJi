@@ -94,9 +94,9 @@ public class FragmentMap extends Fragment {
 //设置Adapter
         List<MapContent> datas = new ArrayList<>();
         datas.add(new MapContent(R.drawable.num1, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num2, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num3, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
-        datas.add(new MapContent(R.drawable.num4, R.drawable.bshiji, "作者司马迁", "司马迁（前145年或前135年-不可考），字子长，夏阳(今陕西韩城南)人。西汉史学家、散文家。司马谈之子，任太史令，因替李陵败降之事辩解而受宫刑，后任中书令。发奋继续完成所著史籍，被后世尊称为史迁、太史公、历史之父。"));
+        datas.add(new MapContent(R.drawable.num2, R.drawable.bbeiqishu, "作者李百药", "李百药（564年—648年），字重规，博陵安平（今河北安平县）人。隋唐时期大臣、史学家、诗人，隋朝内史令李德林之子。"));
+        datas.add(new MapContent(R.drawable.num3, R.drawable.bchenshu, "作者姚思廉", "姚思廉（557年—637年），字简之，一说名简，字思廉，吴兴（今浙江湖州）人。其父姚察于陈朝灭亡后到隋朝做官，迁至北方，故两《唐书》中《姚思廉传》称其为京兆万年（今陕西长安县）人。唐朝初期史学家"));
+        datas.add(new MapContent(R.drawable.num4, R.drawable.bbeishi, "作者李延寿", "李延寿，男，生卒年待考。唐代史学家，相州（今河南安阳）人。贞观年间，做过太子典膳丞、崇贤馆学士，后任御史台主簿，官至符玺郎，兼修国史。"));
         MapContentAdapter recycleAdapter = new MapContentAdapter(datas);
         recyclerView.setAdapter(recycleAdapter);
 
