@@ -1,12 +1,12 @@
 package com.androidlab.shiji.activity;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -144,19 +144,20 @@ public class Search_Intent_Activity extends AppCompatActivity {
             intent.putExtras(bundle);
 
 
-        new SpotsDialog.Builder()
+        final AlertDialog dialog = new SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("正在查询中")
                 .setCancelable(false)
-                .build()
-                .show();
+                .build();
+        dialog.show();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                dialog.cancel();
                 startActivity(intent);
                 finish();
             }
-        }, 2000);
+        }, 1000);
 
     }
 

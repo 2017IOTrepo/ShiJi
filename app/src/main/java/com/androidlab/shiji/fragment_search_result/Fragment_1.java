@@ -62,6 +62,7 @@ public class Fragment_1 extends Fragment {
     private List<Object> xAxis;
     private List<Object> yAxis;
     private static String keyword1;
+    public boolean isGet = false;
 
 
     public static Fragment_1 newInstance(String keyword) {
@@ -88,13 +89,11 @@ public class Fragment_1 extends Fragment {
         search_wordVec.getSettings().setDisplayZoomControls(true);
         search_wordVec.loadUrl("file:///android_asset/aTabletest.html");
 
-        xAxis = new ArrayList<>();
-        yAxis = new ArrayList<>();
 
-        /**
-         * js方法的调用必须在html页面加载完成之后才能调用。
-         * 用webview加载html还是需要耗时间的，必须等待加载完，在执行代用js方法的代码。
-         */
+
+        System.out.println("键值" + keyword1);
+
+
         search_wordVec.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -108,7 +107,15 @@ public class Fragment_1 extends Fragment {
             }
         });
 
-        System.out.println("键值" + keyword1);
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        xAxis = new ArrayList<>();
+        yAxis = new ArrayList<>();
 
         OkHttpClient client = new OkHttpClient();
         // 这里就不加密传输了
@@ -122,11 +129,13 @@ public class Fragment_1 extends Fragment {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                        isGet = false;
                     }
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         if (!response.isSuccessful()) {
+                            isGet = false;
                             return;
                         }
 
@@ -134,6 +143,7 @@ public class Fragment_1 extends Fragment {
                         int code = jsonObject.getInt("code");
 
                         if (code != 0) {
+                            isGet = false;
                             return;
                         }
 
@@ -149,14 +159,16 @@ public class Fragment_1 extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-//                                search_wordVec.reload();
+                                /**
+                                 * js方法的调用必须在html页面加载完成之后才能调用。
+                                 * 用webview加载html还是需要耗时间的，必须等待加载完，在执行代用js方法的代码。
+                                 */
                                 showTable();
+                                isGet = true;
                             }
                         });
                     }
                 });
-
-        return view;
     }
 
     private void showTable() {

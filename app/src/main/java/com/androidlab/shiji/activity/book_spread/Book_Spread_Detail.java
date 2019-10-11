@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.androidlab.shiji.R;
 import com.androidlab.shiji.bean.KeyWords;
 import com.androidlab.shiji.ui.view.TextViewVertical;
+import com.androidlab.shiji.utils.StaticVariable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,19 +39,16 @@ public class Book_Spread_Detail extends AppCompatActivity {
         tv_BookText = findViewById(R.id.tv_BookText);
         Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/STXINGKA.TTF");
         keyword = getIntent().getStringExtra("keyword");
-        BookText = getIntent().getStringExtra("book_spread_content");
+//        BookText = getIntent().getStringExtra("book_spread_content");
+        BookText = StaticVariable.content;
+        System.out.println(BookText);
         setColor();
         tv_BookText.setTypeface(typeface);
-
     }
-
-
 
     /**
      * 文字变色工具方法
      */
-
-
     public void setColor(){
         SpannableString s = new SpannableString(BookText);
         keyword=escapeExprSpecialWord(keyword);
