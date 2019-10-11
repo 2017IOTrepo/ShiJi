@@ -69,10 +69,11 @@ public class BookSpreadRecyclerView_Adapater extends  RecyclerView.Adapter<BookS
 
     @Override
     public void onBindViewHolder(@NonNull BookSpreadHolder bookSpread, final int i) {
+        Book_Spread sp = list.get(i);
 
-        bookSpread.tv_bookspread.setText(list.get(i).getBook_Name());
+        bookSpread.tv_bookspread.setText(sp.getBook_Name());
 
-        bookSpread.iv_bookspread.setImageResource(list.get(i).getBook_Image());
+        bookSpread.iv_bookspread.setImageResource(sp.getBook_Image());
 
         bookSpread.iv_bookspread.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,18 +94,12 @@ public class BookSpreadRecyclerView_Adapater extends  RecyclerView.Adapter<BookS
     }
 
     static class BookSpreadHolder extends RecyclerView.ViewHolder{
-
-
         private ImageView iv_bookspread;
         private TextView tv_bookspread;
         public BookSpreadHolder(@NonNull View itemView) {
             super(itemView);
-
             iv_bookspread = itemView.findViewById(R.id.iv_book_spread);
             tv_bookspread = itemView.findViewById(R.id.tv_book_spread);
-
-
-
         }
     }
 }

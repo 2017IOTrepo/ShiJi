@@ -61,9 +61,12 @@ public class Fragment_1 extends Fragment {
 
     private List<Object> xAxis;
     private List<Object> yAxis;
+    private static String keyword1;
 
-    public static Fragment_1 newInstance() {
+
+    public static Fragment_1 newInstance(String keyword) {
         Bundle args = new Bundle();
+        keyword1 = keyword;
         Fragment_1 fragment = new Fragment_1();
         fragment.setArguments(args);
         return fragment;
@@ -105,6 +108,7 @@ public class Fragment_1 extends Fragment {
             }
         });
 
+        System.out.println("键值" + keyword1);
 
         OkHttpClient client = new OkHttpClient();
         // 这里就不加密传输了
@@ -112,7 +116,7 @@ public class Fragment_1 extends Fragment {
                 .url("http://39.105.110.28:8000/search/vec")
                 .post(new FormBody.Builder()
                         // 这里写关键词
-                        .add("Key", "史记")
+                        .add("Key", keyword1)
                         .build())
                 .build())
                 .enqueue(new Callback() {

@@ -23,6 +23,9 @@ import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.ui.adapter.BookSpreadRecyclerView_Adapater;
 import com.androidlab.shiji.utils.WebUtils;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -43,7 +46,7 @@ public class Fragment_BookSpread extends Fragment {
     private RecyclerView rc_bookSpread;
     private BookSpreadRecyclerView_Adapater adapater;
     private List<Book_Spread> list;
-    private Map<String, R.drawable> bookFront;
+    private Map<String, Integer> bookFront;
     private static String keyword1;
 
 //    private int i = 0 ;
@@ -78,23 +81,13 @@ public class Fragment_BookSpread extends Fragment {
             }
         });
 
-        AlertDialog dialog = new SpotsDialog.Builder()
-                .setContext(getContext())
-                .setMessage("正在查询中")
-                .setCancelable(false)
-                .build();
-        dialog.show();
-        Bundle bundle = new Bundle();
-
-//        System.out.println("bundle" + bundle.getString("data"));
-
         OkHttpClient client = new OkHttpClient();
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
                 .url("http://39.105.110.28:8000/search/ans")
                 .post(new FormBody.Builder()
                         //这里写你的关键词
-                        .add("key", "null")
+                        .add("key", keyword1)
                         .build())
                 .build())
                 .enqueue(new Callback() {
@@ -107,15 +100,39 @@ public class Fragment_BookSpread extends Fragment {
                         if (!response.isSuccessful()) {
                         }
 
-                        Msg msg = WebUtils.msgGetter(response.body().string());
-                        if (msg.code != 0) {
+                        JSONObject jsonObject = JSONObject.fromObject(response.body().string());
+                        int code = jsonObject.getInt("code");
+
+                        if (code != 0) {
+                            return;
                         }
+
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (Object jobj :
+                                jsonArray) {
+                            JSONObject job = JSONObject.fromObject(jobj);
+                            String bookName = job.getString("BookName");
+                            int bookDrawable = R.drawable.bshiji;
+                            if (bookFront.containsKey(bookName)) {
+                                bookDrawable = bookFront.get(bookName);
+                            }
+                            list.add(new Book_Spread(
+                                    bookDrawable,
+                                    job.getString("BookTitle"),
+                                    job.getString("Content")));
+                        }
+
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                            }
+                        });
                     }
                 });
 
         return view;
     }
-
 
     // 初始化 recyclerView
     // 实现一行三列的recyclerView
@@ -125,28 +142,6 @@ public class Fragment_BookSpread extends Fragment {
         rc_bookSpread.setLayoutManager(new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false));
         rc_bookSpread.setAdapter(adapater);
         rc_bookSpread.setItemAnimator(new DefaultItemAnimator());
-
-    }
-
-
-    public void initData() {
-        int pic = R.drawable.bshiji;
-        list = new ArrayList<>();
-
-//            list.add(new Book_Spread(R.drawable.shiji,"史记","史记被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间"));
-        list.add(new Book_Spread(pic, "史记", "史记我深V电饭锅和距估计三点半返回键啥都不会讲课费不就是三大部分几十块三大法宝高科技吧三点半分开关键是是打不开放假吧三大部分将开不开SDK部分可不可三大部分靠技术部复健科SDK保妇康栓就不看SDK部分可不可计算对比三点半妇科疾病似天高磕入三点半分开基本框架三点半分开教室比较快十点半开发几百块收到了吧复健科三大法宝那驾考拉不开那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-        list.add(new Book_Spread(pic, "史记", "史记我那会是被盗号和标点符号含苞待放航班号标定法环境保护局顺便吃饭和近段时间的识别返回键是比较色调和VB发就好v三点半返回键收保护费局部三点半粉红色九点半收到货不符合技术部环境是三等奖话费的身份VB就深V"));
-
-
     }
 
 }
