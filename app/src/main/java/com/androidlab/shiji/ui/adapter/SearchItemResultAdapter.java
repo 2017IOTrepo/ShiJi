@@ -20,18 +20,17 @@ public class SearchItemResultAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
-                return Fragment_1.newInstance();
+                return Fragment_1.newInstance(keyword);
             case 1:
-                return FragmentMap.newInstance();
+                return FragmentMap.newInstance(keyword);
             case 2:
-
                 return Fragment_BookSpread.newInstance(keyword);
 //            case 3:
 //                return Fragment4.newInstance();
             default:
-                return  null;
+                return null;
         }
 
     }

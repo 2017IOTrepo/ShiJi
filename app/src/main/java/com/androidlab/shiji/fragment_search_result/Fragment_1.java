@@ -1,5 +1,6 @@
 package com.androidlab.shiji.fragment_search_result;
 
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.androidlab.shiji.bean.Msg;
 import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.fragment_tab.Fragment2;
 import com.androidlab.shiji.fragment_tab.Fragment_Popular_Science;
+import com.androidlab.shiji.utils.StaticVariable;
 import com.androidlab.shiji.utils.WebUtils;
 import com.github.abel533.echarts.Grid;
 import com.github.abel533.echarts.Legend;
@@ -35,12 +37,18 @@ import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Line;
 import com.github.abel533.echarts.style.TextStyle;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -55,8 +63,16 @@ public class Fragment_1 extends Fragment {
 
     private WebView search_wordVec;
 
-    public static Fragment_1 newInstance() {
+    private List<Object> xAxis;
+    private List<Object> yAxis;
+    private static String keyword1;
+    private AlertDialog dialog;
+    public boolean isGet = false;
+
+
+    public static Fragment_1 newInstance(String keyword) {
         Bundle args = new Bundle();
+        keyword1 = keyword;
         Fragment_1 fragment = new Fragment_1();
         fragment.setArguments(args);
         return fragment;
@@ -78,10 +94,11 @@ public class Fragment_1 extends Fragment {
         search_wordVec.getSettings().setDisplayZoomControls(true);
         search_wordVec.loadUrl("file:///android_asset/aTabletest.html");
 
-        /**
-         * js方法的调用必须在html页面加载完成之后才能调用。
-         * 用webview加载html还是需要耗时间的，必须等待加载完，在执行代用js方法的代码。
-         */
+
+
+        System.out.println("键值" + keyword1);
+
+
         search_wordVec.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -94,17 +111,42 @@ public class Fragment_1 extends Fragment {
                 showTable();
             }
         });
+//        init();
 
+        return view;
+    }
 
-        OkHttpClient client = new OkHttpClient();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dialog = new SpotsDialog.Builder()
+                .setContext(getContext())
+                .setMessage("正在加载中")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+        init();
+    }
+
+    private void init() {
+        xAxis = new ArrayList<>();
+        yAxis = new ArrayList<>();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(300000, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(300000, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(300000, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
                 .url("http://39.105.110.28:8000/search/vec")
                 .post(new FormBody.Builder()
                         // 这里写关键词
-                        .add("Id", "null")
+                        .add("Key", keyword1)
                         .build())
                 .build())
+
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -113,15 +155,50 @@ public class Fragment_1 extends Fragment {
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         if (!response.isSuccessful()) {
+                            return;
                         }
 
-                        Msg msg = WebUtils.msgGetter(response.body().string());
-                        if (msg.code != 0) {
+                        JSONObject jsonObject = JSONObject.fromObject(response.body().string());
+                        int code = jsonObject.getInt("code");
+
+                        if (code != 0) {
+                            return;
                         }
+
+                        JSONArray jsonArray = null;
+
+                        try {
+                            jsonArray = jsonObject.getJSONArray("data");
+                            for (Object jobj :
+                                    jsonArray) {
+                                JSONObject job = JSONObject.fromObject(jobj);
+                                xAxis.add(job.getString("BookName"));
+                                yAxis.add(job.getString("Sums"));
+                            }
+                        } catch (Exception e) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialog.cancel();
+                                }
+                            });
+                            return;
+                        }
+
+//                        showTable();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                /**
+                                 * js方法的调用必须在html页面加载完成之后才能调用。
+                                 * 用webview加载html还是需要耗时间的，必须等待加载完，在执行代用js方法的代码。
+                                 */
+                                dialog.cancel();
+                                showTable();
+                            }
+                        });
                     }
                 });
-
-        return view;
     }
 
     private void showTable() {
@@ -156,17 +233,33 @@ public class Fragment_1 extends Fragment {
         search_wordVec.loadUrl("javascript:loadEcharts("" + option.toString() + "")");
         */
 
-        Object[] xAxis = new Object[]{
-                "三国志", "元史", "北史", "北齐书", "南史", "南齐书", "史记", "后汉书", "周书", "宋书", "宋史", "新五代史", "旧五代史", "旧唐书", "明史", "晋书", "梁书", "汉书", "清史稿", "辽史", "金史", "陈书", "隋书", "魏书"
-        };
-        Object[] yAxis = new Object[]{
-                36, 40, 48, 62, 75, 81, 90, 12, 21, 23,
-                32, 42, 43, 54, 45, 54, 45, 45, 45,
-                12, 23, 23, 23, 12
-        };
+//        Object[] xAxis = new Object[]{
+//                "三国志", "元史", "北史", "北齐书", "南史", "南齐书", "史记", "后汉书", "周书", "宋书", "宋史", "新五代史", "旧五代史", "旧唐书", "明史", "晋书", "梁书", "汉书", "清史稿", "辽史", "金史", "陈书", "隋书", "魏书"
+//        };
+//        Object[] yAxis = new Object[]{
+//                10000, 9234, 9023, 8934, 8212, 8023, 7133, 7012, 6976, 6767,
+//                6490, 6080, 5012, 5013, 4011, 4000, 3911, 3800, 3200,
+//                3200, 3100, 3000, 2999, 2988
+//        };
+
+
+        Object[] xAxisArray = new String[xAxis.size()];
+
+        //使用for循环得到数组
+        for (int i = 0; i < xAxis.size(); i++) {
+            xAxisArray[i] = xAxis.get(i);
+        }
+
+        Object[] yAxisArray = new String[yAxis.size()];
+
+        //使用for循环得到数组
+        for (int i = 0; i < yAxis.size(); i++) {
+            yAxisArray[i] = yAxis.get(i);
+        }
+
         GsonOption option = new GsonOption();
         Title title = new Title();
-        title.setText("史记词向量结果");
+        title.setText(keyword1 + "词向量结果");
         title.left("center");
         option.title(title);
         option.color("#3398DB");
@@ -187,7 +280,7 @@ public class Fragment_1 extends Fragment {
         CategoryAxis categorxAxis = new CategoryAxis();
         categorxAxis.axisLine().onZero(false);
         categorxAxis.boundaryGap(true);
-        categorxAxis.data(xAxis);
+        categorxAxis.data(xAxisArray);
         AxisLabel axisLabel = new AxisLabel();
         TextStyle textStyle = new TextStyle();
         textStyle.fontWeight("bold");
@@ -197,7 +290,7 @@ public class Fragment_1 extends Fragment {
         option.yAxis(categorxAxis);
 
         Bar bar = new Bar();
-        bar.name("词数量(个)").data(yAxis).barWidth(new Integer(30));
+        bar.name("词数量(个)").data(yAxisArray).barWidth(new Integer(30));
         option.series(bar);
 
         search_wordVec.loadUrl("javascript:loadEcharts('" + option.toString() + "')");

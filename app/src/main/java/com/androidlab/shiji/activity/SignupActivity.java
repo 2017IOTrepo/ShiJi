@@ -91,6 +91,7 @@ public class SignupActivity extends AppCompatActivity {
         // TODO: 注册逻辑
 
         OkHttpClient client = new OkHttpClient();
+        System.out.println("name" + name);
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
                 .url("http://39.105.110.28:8000/user/register")
@@ -103,8 +104,14 @@ public class SignupActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        onSignupFailed();
-                        progressDialog.dismiss();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onSignupFailed();
+                                progressDialog.dismiss();
+                            }
+                        });
+
                     }
 
                     @Override
@@ -157,7 +164,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Sign Up failed", Toast.LENGTH_LONG).show();
         mSignupButton.setEnabled(true);
     }
 

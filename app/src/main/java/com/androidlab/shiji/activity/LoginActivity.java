@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
-                .url("http://39.105.110.28:8000/user/register")
+                .url("http://39.105.110.28:8000/user/login")
                 .post(new FormBody.Builder()
                         .add("Email", email)
                         .add("Password", password)
@@ -100,8 +100,13 @@ public class LoginActivity extends AppCompatActivity {
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        onLoginFailed();
-                        progressDialog.dismiss();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onLoginFailed();
+                                progressDialog.dismiss();
+                            }
+                        });
                     }
 
                     @Override
@@ -135,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
                         StaticVariable.isLogin = true;
 
                         setResult(RESULT_OK, null);
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -174,7 +178,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         mLoginButton.setEnabled(true);
     }
 

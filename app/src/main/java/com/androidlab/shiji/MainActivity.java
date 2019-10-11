@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
         //侧滑栏
         profile = new ProfileDrawerItem()
-                .withName(User.INSTANCE.Name)
-                .withEmail(User.INSTANCE.Email)
+                .withName("alistory")
+                .withEmail("123@outlook.com")
                 .withIcon(R.drawable.touxiang);
 
         headerResult = new AccountHeaderBuilder()
@@ -257,19 +257,19 @@ public class MainActivity extends AppCompatActivity {
         if (StaticVariable.isLogin) {
             setProfile();
         } else {
-            new AlertDialog.Builder(this)
-                    .setTitle("注意")
-                    .setMessage("检测到你没有登录 请现在登录")
-                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Start the Signup activity
-                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivityForResult(intent, 1);
-                        }
-                    })
-                    .create()
-                    .show();
+//            new AlertDialog.Builder(this)
+//                    .setTitle("注意")
+//                    .setMessage("检测到你没有登录 请现在登录")
+//                    .setPositiveButton("好", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            // Start the Signup activity
+//                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                            startActivityForResult(intent, 1);
+//                        }
+//                    })
+//                    .create()
+//                    .show();
         }
     }
 
