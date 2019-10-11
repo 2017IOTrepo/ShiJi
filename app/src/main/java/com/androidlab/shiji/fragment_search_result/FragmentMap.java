@@ -39,9 +39,11 @@ public class FragmentMap extends Fragment {
 
     private WebView searchMap;
     private RecyclerView recyclerView;
+    private static String keyword1;
 
-    public static FragmentMap newInstance() {
+    public static FragmentMap newInstance(String keyword) {
         Bundle args = new Bundle();
+        keyword1 = keyword;
         FragmentMap fragment = new FragmentMap();
         fragment.setArguments(args);
         return fragment;
@@ -108,7 +110,7 @@ public class FragmentMap extends Fragment {
         GsonOption option = new GsonOption();
         option.backgroundColor("#FFFFFF");
         Title title = new Title();
-        title.setText("史记" + "On The Map");
+        title.setText(keyword1 + "On The Map");
         title.setLeft("center");
         option.title(title);
         //option.tooltip().trigger(Trigger.item);

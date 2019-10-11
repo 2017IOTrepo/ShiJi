@@ -139,20 +139,32 @@ public class Fragment_BookSpread extends Fragment {
                             return;
                         }
 
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        for (Object jobj :
-                                jsonArray) {
-                            JSONObject job = JSONObject.fromObject(jobj);
-                            String bookName = job.getString("BookName");
-                            int bookDrawable = R.drawable.bshiji;
-                            if (bookFront.containsKey(bookName)) {
-                                bookDrawable = bookFront.get(bookName);
+                        JSONArray jsonArray = null;
+                        try {
+                            jsonArray = jsonObject.getJSONArray("data");
+                            for (Object jobj :
+                                    jsonArray) {
+                                JSONObject job = JSONObject.fromObject(jobj);
+                                String bookName = job.getString("BookName");
+                                int bookDrawable = R.drawable.bshiji;
+                                if (bookFront.containsKey(bookName)) {
+                                    bookDrawable = bookFront.get(bookName);
+                                }
+                                list.add(new Book_Spread(
+                                        bookDrawable,
+                                        job.getString("Title"),
+                                        job.getString("Content")));
                             }
-                            list.add(new Book_Spread(
-                                    bookDrawable,
-                                    job.getString("Title"),
-                                    job.getString("Content")));
+                        } catch (Exception e) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialog.cancel();
+                                }
+                            });
+                            return;
                         }
+
 
                         getActivity().runOnUiThread(new Runnable() {
                             @Override

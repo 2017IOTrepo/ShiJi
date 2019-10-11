@@ -111,7 +111,7 @@ public class Fragment_1 extends Fragment {
                 showTable();
             }
         });
-        init();
+//        init();
 
         return view;
     }
@@ -125,7 +125,7 @@ public class Fragment_1 extends Fragment {
                 .setCancelable(false)
                 .build();
         dialog.show();
-//        init();
+        init();
     }
 
     private void init() {
@@ -165,12 +165,24 @@ public class Fragment_1 extends Fragment {
                             return;
                         }
 
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        for (Object jobj :
-                                jsonArray) {
-                            JSONObject job = JSONObject.fromObject(jobj);
-                            xAxis.add(job.getString("BookName"));
-                            yAxis.add(job.getString("Sums"));
+                        JSONArray jsonArray = null;
+
+                        try {
+                            jsonArray = jsonObject.getJSONArray("data");
+                            for (Object jobj :
+                                    jsonArray) {
+                                JSONObject job = JSONObject.fromObject(jobj);
+                                xAxis.add(job.getString("BookName"));
+                                yAxis.add(job.getString("Sums"));
+                            }
+                        } catch (Exception e) {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    dialog.cancel();
+                                }
+                            });
+                            return;
                         }
 
 //                        showTable();
@@ -247,7 +259,7 @@ public class Fragment_1 extends Fragment {
 
         GsonOption option = new GsonOption();
         Title title = new Title();
-        title.setText("史记词向量结果");
+        title.setText(keyword1 + "词向量结果");
         title.left("center");
         option.title(title);
         option.color("#3398DB");
