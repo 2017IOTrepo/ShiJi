@@ -144,20 +144,20 @@ public class Search_Intent_Activity extends AppCompatActivity {
             intent.putExtras(bundle);
 
 
-        final AlertDialog dialog = new SpotsDialog.Builder()
-                .setContext(this)
-                .setMessage("正在查询中")
-                .setCancelable(false)
-                .build();
-        dialog.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                dialog.cancel();
-                startActivity(intent);
-                finish();
-            }
-        }, 1000);
+//        final AlertDialog dialog = new SpotsDialog.Builder()
+//                .setContext(this)
+//                .setMessage("正在查询中")
+//                .setCancelable(false)
+//                .build();
+//        dialog.show();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                dialog.cancel();
+        startActivity(intent);
+        finish();
+//            }
+//        }, 1000);
 
     }
 

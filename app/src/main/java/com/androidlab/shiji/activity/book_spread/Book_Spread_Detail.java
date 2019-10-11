@@ -66,9 +66,6 @@ public class Book_Spread_Detail extends AppCompatActivity {
 //                    s.setSpan(new BackgroundColorSpan(Color.DKGRAY), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     // 字体加粗
                     s.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-
                 }
             }catch (Exception e){
                 Log.e("Result_Fragment_3", "matcherSearchTitle: "+e.toString());

@@ -1,5 +1,6 @@
 package com.androidlab.shiji.fragment_search_result;
 
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.androidlab.shiji.bean.Msg;
 import com.androidlab.shiji.bean.User;
 import com.androidlab.shiji.fragment_tab.Fragment2;
 import com.androidlab.shiji.fragment_tab.Fragment_Popular_Science;
+import com.androidlab.shiji.utils.StaticVariable;
 import com.androidlab.shiji.utils.WebUtils;
 import com.github.abel533.echarts.Grid;
 import com.github.abel533.echarts.Legend;
@@ -44,7 +46,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -62,6 +66,7 @@ public class Fragment_1 extends Fragment {
     private List<Object> xAxis;
     private List<Object> yAxis;
     private static String keyword1;
+    private AlertDialog dialog;
     public boolean isGet = false;
 
 
@@ -106,6 +111,7 @@ public class Fragment_1 extends Fragment {
                 showTable();
             }
         });
+        init();
 
         return view;
     }
@@ -113,11 +119,25 @@ public class Fragment_1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dialog = new SpotsDialog.Builder()
+                .setContext(getContext())
+                .setMessage("正在加载中")
+                .setCancelable(false)
+                .build();
+        dialog.show();
+//        init();
+    }
 
+    private void init() {
         xAxis = new ArrayList<>();
         yAxis = new ArrayList<>();
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(300000, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(300000, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(300000, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
                 .url("http://39.105.110.28:8000/search/vec")
@@ -126,16 +146,15 @@ public class Fragment_1 extends Fragment {
                         .add("Key", keyword1)
                         .build())
                 .build())
+
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                        isGet = false;
                     }
 
                     @Override
                     public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                         if (!response.isSuccessful()) {
-                            isGet = false;
                             return;
                         }
 
@@ -143,7 +162,6 @@ public class Fragment_1 extends Fragment {
                         int code = jsonObject.getInt("code");
 
                         if (code != 0) {
-                            isGet = false;
                             return;
                         }
 
@@ -163,8 +181,8 @@ public class Fragment_1 extends Fragment {
                                  * js方法的调用必须在html页面加载完成之后才能调用。
                                  * 用webview加载html还是需要耗时间的，必须等待加载完，在执行代用js方法的代码。
                                  */
+                                dialog.cancel();
                                 showTable();
-                                isGet = true;
                             }
                         });
                     }

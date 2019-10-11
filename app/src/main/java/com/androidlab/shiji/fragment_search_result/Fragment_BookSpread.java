@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
@@ -105,13 +106,20 @@ public class Fragment_BookSpread extends Fragment {
                 .build();
         dialog.show();
 
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(300000, TimeUnit.SECONDS)//设置读取超时时间
+                .writeTimeout(300000, TimeUnit.SECONDS)//设置写的超时时间
+                .connectTimeout(300000, TimeUnit.SECONDS)//设置连接超时时间
+                .build();
+
+//        OkHttpClient client = new OkHttpClient();
+        System.out.println("key" + keyword1);
         // 这里就不加密传输了
         client.newCall(new Request.Builder()
                 .url("http://39.105.110.28:8000/search/ans")
                 .post(new FormBody.Builder()
                         //这里写你的关键词
-                        .add("key", keyword1)
+                        .add("Key", keyword1)
                         .build())
                 .build())
                 .enqueue(new Callback() {
