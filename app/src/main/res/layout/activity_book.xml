@@ -21,7 +21,7 @@
             android:layout_height="80dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="70dp"
+            android:layout_marginStart="90dp"
             android:layout_marginTop="21dp"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -54,7 +54,7 @@
             android:layout_height="80dp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/cardview1"
-            android:layout_marginEnd="70dp"
+            android:layout_marginEnd="90dp"
 
             android:clickable="true"
             app:cardBackgroundColor="@android:color/transparent"

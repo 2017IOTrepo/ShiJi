@@ -74,7 +74,6 @@ public class Fragment_BookSpread extends Fragment {
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         view = inflater.inflate(R.layout.fragment_3, container, false);
-
         initRecyclerView(view);
 
         adapater.setOnclick(new BookSpreadRecyclerView_Adapater.ClickInterface() {
@@ -96,7 +95,6 @@ public class Fragment_BookSpread extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         initData();
         list = new ArrayList<>();
         dialog = new SpotsDialog.Builder()
@@ -179,7 +177,7 @@ public class Fragment_BookSpread extends Fragment {
     }
 
     private void initData() {
-        bookFront = new HashMap<String, Integer>();
+        bookFront = new HashMap<>();
         bookFront.put("北齐书", R.drawable.bbeiqishu);
         bookFront.put("北史", R.drawable.bbeishi);
         bookFront.put("陈书", R.drawable.bchenshu);
