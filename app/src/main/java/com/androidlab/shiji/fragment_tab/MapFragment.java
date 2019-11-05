@@ -72,10 +72,10 @@ public class MapFragment extends Fragment {
                 chartshow_web.loadUrl("file:///android_asset/xizhou.html");
                 break;
             case 4://东周
-                chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
+                //chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
                 break;
             case 5://东周战国
-                chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
+                //chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
                 break;
             case 6://qin
                 chartshow_web.loadUrl("file:///android_asset/qin.html");
@@ -87,7 +87,7 @@ public class MapFragment extends Fragment {
                 chartshow_web.loadUrl("file:///android_asset/donghan.html");
                 break;
             case 9://三国
-                chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
+                //chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
                 break;
             case 10://西晋
                 chartshow_web.loadUrl("file:///android_asset/xijin.html");
@@ -105,7 +105,7 @@ public class MapFragment extends Fragment {
                 chartshow_web.loadUrl("file:///android_asset/tang.html");
                 break;
             case 15: //五代十国
-                chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
+                //chartshow_web.loadUrl("file:///android_asset/gongheguo.html");
                 break;
             case 16:
                 chartshow_web.loadUrl("file:///android_asset/beisong.html");
