@@ -113,32 +113,6 @@ public class FragmentMap extends Fragment {
         title.setText(keyword1 + "On The Map");
         title.setLeft("center");
         option.title(title);
-        //option.tooltip().trigger(Trigger.item);
-//        String[] colors = new String[6];
-//        colors[0] = "#5475f5";
-//        colors[1] = "#9feaa5";
-//        colors[2] = "#85daef";
-//        colors[3] = "#74e2ca";
-//        colors[4] = "#e6ac53";
-//        colors[5] = "#9fb5ea";
-//        List<VisualMap> visualMapList = new ArrayList<VisualMap>();
-//        VisualMap visualMap = new VisualMap();
-//        visualMap.show(true)
-//                .min(0)
-//                .max(600)
-//                .x(X.left)
-//                .y(Y.center)
-//                .color(colors)
-//                .splitNumber(6);
-///***
-// * splitList: [
-// {start: 500, end:600},{start: 400, end: 500},
-// {start: 300, end: 400},{start: 200, end: 300},
-// {start: 100, end: 200},{start: 0, end: 100},
-// ],
-// */
-//        visualMapList.add(visualMap);
-        //option.visualMap(visualMapList);
 
         Geo geo = new Geo();
         geo.map("china");
@@ -174,51 +148,6 @@ public class FragmentMap extends Fragment {
         scatter.setLabel(itemStyle);
         option.series(scatter);
 
-        Map map = new Map();
-        ItemStyle label = new ItemStyle();
-        label.normal().show(true);
-        label.emphasis().show(true);
-        map.name("数据")
-                .mapType("china")
-                .roam(true)
-                .label(label);
-        List<MapData> data = new ArrayList<MapData>();
-        data.add(new MapData("北京", 242));
-        data.add(new MapData("上海", 345));
-        data.add(new MapData("河北", 453));
-        data.add(new MapData("云南", 263));
-        data.add(new MapData("黑龙江", 344));
-        data.add(new MapData("安徽", 123));
-        data.add(new MapData("新疆", 25));
-        data.add(new MapData("浙江", 38));
-        data.add(new MapData("湖北", 70));
-        data.add(new MapData("甘肃", 245));
-        data.add(new MapData("内蒙古", 135));
-        data.add(new MapData("吉林", 536));
-        data.add(new MapData("贵州", 521));
-        data.add(new MapData("青海", 142));
-        data.add(new MapData("四川", 435));
-        data.add(new MapData("海南", 123));
-        data.add(new MapData("香港", 453));
-        data.add(new MapData("天津", 12));
-        data.add(new MapData("重庆", 432));
-        data.add(new MapData("河南", 123));
-        data.add(new MapData("辽宁", 62));
-        data.add(new MapData("湖南", 153));
-        data.add(new MapData("山东", 432));
-        data.add(new MapData("江苏", 120));
-        data.add(new MapData("江西", 105));
-        data.add(new MapData("广西", 452));
-        data.add(new MapData("山西", 153));
-        data.add(new MapData("陕西", 263));
-        data.add(new MapData("陕西", 153));
-        data.add(new MapData("广东", 136));
-        data.add(new MapData("西藏", 165));
-        data.add(new MapData("宁夏", 451));
-        data.add(new MapData("台湾", 462));
-        data.add(new MapData("澳门", 153));
-
-        map.setData(data);
         // option.series(map);
 
         searchMap.loadUrl("javascript:loadEcharts('" + option.toString() + "')");

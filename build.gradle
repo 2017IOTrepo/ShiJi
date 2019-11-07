@@ -27,6 +27,9 @@ allprojects {
             url 'https://oss.sonatype.org/content/repositories/snapshots'
 
         }
+        flatDir {
+            dirs 'libs'
+        }
 
         maven { url "https://jitpack.io" }
     }
