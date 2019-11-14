@@ -233,7 +233,7 @@ public class Fragment_1 extends Fragment {
         option.series(bar);
         search_wordVec.loadUrl("javascript:loadEcharts("" + option.toString() + "")");
         */
-// TODO 手动数据
+// TODO 手动数据2333333
         Object[] xAxisArray;
         Object[] yAxisArray;
         if(keyword1.equals("史记")){
