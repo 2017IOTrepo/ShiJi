@@ -216,7 +216,7 @@ public class FragmentMap extends Fragment {
             map3Ddata.add(new Scatter3Ddata("min","120","30","100"));
         }
 
-        //Log.d("MapFragment",GsonUtil.format(map3Ddata));
+        //Log.d("M    apFragment",GsonUtil.format(map3Ddata));
         //searchMap.loadUrl("javascript:loadEcharts('" + option.toString() + "')");
         searchMap.loadUrl("javascript:loadEcharts('" + GsonUtil.format(map3Ddata) + "')");
     }
