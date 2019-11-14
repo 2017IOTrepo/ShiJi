@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="./echarts.js"></script>
+<script type="text/javascript" src="./echarts-gl.js"></script>
+<script type="text/javascript" src="./dataTool.js"></script>
+<script type="text/javascript" src="./china.js"></script>
+<script type="text/javascript" src="./world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=litwTUbYUu77A3O8dTIZU5zBvCNnM58h"></script>
+<script type="text/javascript" src="./bmap.js"></script>
+<script type="text/javascript">
+
+    var dom =document.getElementById("container");
+    var myChart =echarts.init(dom);
+    var app ={};
+    var barData = [{
+        name: '淄博市',
+        value: [108.047648, 36.814939, 100]
+    },
+    {
+        name: '枣庄市',
+        value: [117.557964, 30.856424, 100]
+    },
+    {
+        name: '济南市',
+        value: [117.000923, 36.675807, 100]
+    },
+];
+    function loadEcharts(echartJson){
+        var datain = JSON.parse(echartJson); //data
+        if (datain &&typeof datain ==="object") {
+            myChart.setOption({
+    title: {
+        text: '县志搜索结果',
+        x: 'center',
+        top: "20",
+        textStyle: {
+            color: '#000',
+            fontSize: 24
+        }
+    },
+    geo3D: {
+        map: 'china',
+        roam: true,
+        itemStyle: {
+            color: 'rgb(61,89,171)', //地图颜色
+            opacity: 1,
+            borderWidth: 0.8,
+            borderColor: 'rgb(25,25,112)'
+        },
+        label: {
+            show: false,
+            textStyle: {
+                color: '#000', //地图初始化区域字体颜色
+                fontSize: 16,
+                opacity: 1,
+                //backgroundColor: 'rgba(0,0,0,0)'
+                backgroundColor: 'rgba(53,171,199,0)'
+            },
+        },
+        emphasis: { //当鼠标放上去  地区区域是否显示名称
+            label: {
+                show: true,
+                textStyle: {
+                    color: '#000',
+                    fontSize: 16,
+                    backgroundColor: 'rgba(0,23,11,0)'
+                }
+            }
+        },
+        //shading: 'lambert',
+        light: { //光照阴影
+            main: {
+                color: '#fff', //光照颜色
+                intensity: 1.2, //光照强度
+                //shadowQuality: 'high', //阴影亮度
+                shadow: false, //是否显示阴影
+                alpha: 55,
+                beta: 10
+
+            },
+            ambient: {
+                intensity: 0.3
+            }
+        }
+    },
+    series: [
+        {
+            type: 'bar3D',
+            coordinateSystem: 'geo3D',
+            bevelSize: 0,
+            itemStyle: {
+                color: '#17e3ff',
+                opacity: 1
+            },
+            shading: 'lambert',
+            data: datain,
+        }
+
+    ]
+    });
+    }
+    }
+
+
+</script>
+</body>
+</html>

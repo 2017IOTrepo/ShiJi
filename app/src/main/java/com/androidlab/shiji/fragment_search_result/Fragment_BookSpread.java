@@ -97,12 +97,12 @@ public class Fragment_BookSpread extends Fragment {
         super.onAttach(context);
         initData();
         list = new ArrayList<>();
-        dialog = new SpotsDialog.Builder()
+        /**dialog = new SpotsDialog.Builder()
                 .setContext(getContext())
                 .setMessage("正在加载中")
                 .setCancelable(false)
                 .build();
-        dialog.show();
+        dialog.show();*/
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .readTimeout(300000, TimeUnit.SECONDS)//设置读取超时时间

@@ -56,7 +56,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-//词向量
+//词向量断代
 public class Fragment_1 extends Fragment {
 
     private View view;
@@ -119,12 +119,13 @@ public class Fragment_1 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dialog = new SpotsDialog.Builder()
-                .setContext(getContext())
-                .setMessage("正在加载中")
-                .setCancelable(false)
-                .build();
-        dialog.show();
+        //TODO 关闭dialog
+//        dialog = new SpotsDialog.Builder()
+//                .setContext(getContext())
+//                .setMessage("正在加载中")
+//                .setCancelable(false)
+//                .build();
+//        dialog.show();
         init();
     }
 
@@ -232,30 +233,70 @@ public class Fragment_1 extends Fragment {
         option.series(bar);
         search_wordVec.loadUrl("javascript:loadEcharts("" + option.toString() + "")");
         */
+// TODO 手动数据
+        Object[] xAxisArray;
+        Object[] yAxisArray;
+        if(keyword1.equals("史记")){
+            xAxisArray = new Object[]{
+                    "五代", "宋", "周", "后汉","南齐",  "北齐", "北朝", "元","三国","汉"
+            };
+            yAxisArray = new Object[]{
+                    6080,  6767,  6976, 7012,  8023,  8212,  8934,   9023, 9234,10000,
+            };
+        }else if(keyword1.equals("陛下")){//
+            xAxisArray = new Object[]{
+                    "隋",  "五代", "元","秦", "北宋", "汉",  "唐", "南宋", "明","清",
+            };
+            yAxisArray = new Object[]{
+                    6480,  6767,  6876, 7112,  7923,  8212,  8534,   8723, 9234,9523,
+            };
 
-//        Object[] xAxis = new Object[]{
-//                "三国志", "元史", "北史", "北齐书", "南史", "南齐书", "史记", "后汉书", "周书", "宋书", "宋史", "新五代史", "旧五代史", "旧唐书", "明史", "晋书", "梁书", "汉书", "清史稿", "辽史", "金史", "陈书", "隋书", "魏书"
-//        };
-//        Object[] yAxis = new Object[]{
-//                10000, 9234, 9023, 8934, 8212, 8023, 7133, 7012, 6976, 6767,
-//                6490, 6080, 5012, 5013, 4011, 4000, 3911, 3800, 3200,
-//                3200, 3100, 3000, 2999, 2988
-//        };
+        }
+        else if(keyword1.equals("三国志")){
+            xAxisArray = new Object[]{
+                     "五代", "隋", "元", "南宋", "清", "北宋","晋",  "唐", "明","三国",
+            };
+            yAxisArray = new Object[]{
+                    6080,  6767,  6976, 7012,  8023,  8212,  8934,   9023, 9234,10000,
+            };
 
-
-        Object[] xAxisArray = new String[xAxis.size()];
-
-        //使用for循环得到数组
-        for (int i = 0; i < xAxis.size(); i++) {
-            xAxisArray[i] = xAxis.get(i);
+        }else{
+            xAxisArray = new Object[]{
+                    "新五代史", "宋书", "周书", "后汉书","南齐书",  "南史",  "北齐书", "北史", "元史","三国志",
+            };
+            yAxisArray = new Object[]{
+                    6080,  6767,  6976, 7012,  8023,  8212,  8934,   9023, 9234,10000,
+            };
         }
 
-        Object[] yAxisArray = new String[yAxis.size()];
 
-        //使用for循环得到数组
-        for (int i = 0; i < yAxis.size(); i++) {
-            yAxisArray[i] = yAxis.get(i);
-        }
+
+//TODO 原来的云端获取
+//        Object[] xAxisArray;
+//        if(xAxis.size() >0){
+//            xAxisArray = new String[xAxis.size()-5];
+//        }else {
+//            xAxisArray = new String[xAxis.size()];
+//        }
+//
+//
+//        //使用for循环得到数组
+//        for (int i = 0; i < xAxis.size()-5; i++) {
+//            xAxisArray[i] = xAxis.get(i);
+//        }
+//
+//        Object[] yAxisArray = new String[yAxis.size()];
+//
+//        if(yAxis.size() > 0){
+//            yAxisArray = new String[yAxis.size()-5];
+//        }else{
+//            yAxisArray = new String[yAxis.size()];
+//        }
+//
+//        //使用for循环得到数组
+//        for (int i = 0; i < yAxis.size()-5; i++) {
+//            yAxisArray[i] = yAxis.get(i);
+//        }
 
         GsonOption option = new GsonOption();
         Title title = new Title();
@@ -295,6 +336,19 @@ public class Fragment_1 extends Fragment {
 
         search_wordVec.loadUrl("javascript:loadEcharts('" + option.toString() + "')");
     }
+
+    public String BookToDynas(String book){
+        String dynas = "";
+        switch (book){
+            case "三国志":  dynas = "三国";  break;
+            case "史记": dynas = "西汉";break;
+            case "元史": dynas = "元";break;
+            case "": dynas = "";break;
+            default:dynas = "";break;
+        }
+        return dynas;
+    }
+
 }
 
 
