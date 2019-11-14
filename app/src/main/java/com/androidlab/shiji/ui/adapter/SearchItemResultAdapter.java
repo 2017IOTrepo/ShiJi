@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.androidlab.shiji.fragment_search_result.Fragment_1;
 import com.androidlab.shiji.fragment_search_result.FragmentMap;
 import com.androidlab.shiji.fragment_search_result.Fragment_BookSpread;
+import com.androidlab.shiji.fragment_search_result.Fragment_wordVec;
 
 public class SearchItemResultAdapter extends FragmentPagerAdapter {
     private int size;
@@ -22,7 +23,7 @@ public class SearchItemResultAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return Fragment_1.newInstance(keyword);
+                return Fragment_wordVec.newInstance(keyword);
             case 1:
                 return FragmentMap.newInstance(keyword);
             case 2:

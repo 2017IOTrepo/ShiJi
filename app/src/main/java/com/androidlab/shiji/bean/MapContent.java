@@ -5,6 +5,17 @@ public class MapContent {
     int image;
     String title;
     String content;
+    String autherName;
+
+    double autherLong; //经度
+    double autherLati; //纬度
+
+    public MapContent(String title, String autherName, double autherLong, double autherLati) {
+        this.title = title;
+        this.autherName = autherName;
+        this.autherLong = autherLong;
+        this.autherLati = autherLati;
+    }
 
     public MapContent(int num, int image, String title, String content) {
         this.num = num;

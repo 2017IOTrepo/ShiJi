@@ -114,4 +114,6 @@ dependencies {
     implementation files('libs/kotlin-stdlib-common-1.3.50-sources.jar')
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.50"
 
+    implementation 'com.moxun:tagcloudlib:1.2.0'
+
 }
