@@ -52,7 +52,7 @@ public class Fragment_wordVec extends Fragment {
 
         mTabLayout = view.findViewById(R.id.tab_wordvec);
         mViewPager = view.findViewById(R.id.view_pager_wordvec);
-        adapter = new WordVecAdapter(getActivity().getSupportFragmentManager(),tabs ,keyword1);
+        adapter = new WordVecAdapter(getChildFragmentManager(),tabs ,keyword1);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
