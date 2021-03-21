@@ -1,3 +1,2 @@
-*.js linguist-vendored
-*.css linguist-vendored
-*.html linguist-vendored
+apiv2/static/* linguist-vendored
+apiv2/templates/* linguist-vendored
