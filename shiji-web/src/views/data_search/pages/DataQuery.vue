@@ -69,7 +69,7 @@
               章节: {{ clickBook.title }}
               作者: {{ clickBook.author }}
             </p>
-            <a :href="'http://119.3.166.63:8081/#/chapter?cpid=' + clickBook.id+'&id=' + clickBook.b_id">
+            <a :href="'http://127.0.0.1:8081/#/chapter?cpid=' + clickBook.id+'&id=' + clickBook.b_id">
               查看更多
             </a>
           </el-card>

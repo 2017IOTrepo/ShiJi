@@ -36,7 +36,7 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data.token)
         commit('SET_EMAIL', data.email)
-        commit('SET_AVATAR', data.avatar)
+        commit('SET_AVATAR', 'https://shiji-1258573901.cos.ap-chengdu.myqcloud.com/LOGO.png')
         setToken(data.token)
         resolve()
       }).catch(error => {
@@ -57,10 +57,10 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const { email, avatar } = data
+        const { email } = data
 
         commit('SET_EMAIL', email)
-        commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', 'https://shiji-1258573901.cos.ap-chengdu.myqcloud.com/LOGO.png')
         resolve(data)
       }).catch(error => {
         reject(error)

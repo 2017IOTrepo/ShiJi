@@ -204,72 +204,72 @@ export default {
       this.optionM.xAxis.data = chooseProvince(5)
       this.optionP.xAxis.data = chooseProvince(5)
       if (val < -2070) {
-        this.src = 'http://119.3.166.63:9000/dy/chuanshuo'
+        this.src = 'http://127.0.0.1:9000/dy/chuanshuo'
         this.optionM.series[0].data = []
         this.optionP.series[0].data = []
         this.optionM.xAxis.data = []
         this.optionP.xAxis.data = []
       }
       if (val >= -2070 && val < -1600) {
-        this.src = 'http://119.3.166.63:9000/dy/xia'
+        this.src = 'http://127.0.0.1:9000/dy/xia'
         this.optionM.series[0].data = chooseDatas(10, 100, 5)
         this.optionP.series[0].data = chooseDatas(10, 100, 5)
         this.optionM.xAxis.data = chooseProvince(5)
         this.optionP.xAxis.data = chooseProvince(5)
       }
       if (val >= -1600 && val < -1046) {
-        this.src = 'http://119.3.166.63:9000/dy/shang'
+        this.src = 'http://127.0.0.1:9000/dy/shang'
       }
       if (val >= -1046 && val < -771) {
-        this.src = 'http://119.3.166.63:9000/dy/xizhou'
+        this.src = 'http://127.0.0.1:9000/dy/xizhou'
       }
       if (val >= -771 && val < -453) {
-        this.src = 'http://119.3.166.63:9000/dy/xizhou'
+        this.src = 'http://127.0.0.1:9000/dy/xizhou'
       }
       if (val >= -453 && val < -221) {
-        this.src = 'http://119.3.166.63:9000/dy/xizhou'
+        this.src = 'http://127.0.0.1:9000/dy/xizhou'
       }
       if (val >= -221 && val < 206) {
-        this.src = 'http://119.3.166.63:9000/dy/qin'
+        this.src = 'http://127.0.0.1:9000/dy/qin'
       }
       if (val >= -206 && val < 24) {
-        this.src = 'http://119.3.166.63:9000/dy/xihan'
+        this.src = 'http://127.0.0.1:9000/dy/xihan'
       }
       if (val >= 24 && val < 280) {
-        this.src = 'http://119.3.166.63:9000/dy/xihan'
+        this.src = 'http://127.0.0.1:9000/dy/xihan'
       }
       if (val >= 280 && val < 316) {
-        this.src = 'http://119.3.166.63:9000/dy/xijin'
+        this.src = 'http://127.0.0.1:9000/dy/xijin'
       }
       if (val >= 316 && val < 420) {
-        this.src = 'http://119.3.166.63:9000/dy/dongjin'
+        this.src = 'http://127.0.0.1:9000/dy/dongjin'
       }
       if (val >= 420 && val < 589) {
-        this.src = 'http://119.3.166.63:9000/dy/nanbeichao'
+        this.src = 'http://127.0.0.1:9000/dy/nanbeichao'
       }
       if (val >= 589 && val < 619) {
-        this.src = 'http://119.3.166.63:9000/dy/sui'
+        this.src = 'http://127.0.0.1:9000/dy/sui'
       }
       if (val >= 619 && val < 960) {
-        this.src = 'http://119.3.166.63:9000/dy/tang'
+        this.src = 'http://127.0.0.1:9000/dy/tang'
       }
       if (val >= 960 && val < 1127) {
-        this.src = 'http://119.3.166.63:9000/dy/beisong'
+        this.src = 'http://127.0.0.1:9000/dy/beisong'
       }
       if (val >= 1127 && val < 1279) {
-        this.src = 'http://119.3.166.63:9000/dy/nansong'
+        this.src = 'http://127.0.0.1:9000/dy/nansong'
       }
       if (val >= 1279 && val < 1368) {
-        this.src = 'http://119.3.166.63:9000/dy/yuan'
+        this.src = 'http://127.0.0.1:9000/dy/yuan'
       }
       if (val >= 1368 && val < 1644) {
-        this.src = 'http://119.3.166.63:9000/dy/ming'
+        this.src = 'http://127.0.0.1:9000/dy/ming'
       }
       if (val >= 1644 && val < 1912) {
-        this.src = 'http://119.3.166.63:9000/dy/qing'
+        this.src = 'http://127.0.0.1:9000/dy/qing'
       }
       if (val >= 1949) {
-        this.src = 'http://119.3.166.63:9000/dy/gongheguo'
+        this.src = 'http://127.0.0.1:9000/dy/gongheguo'
         this.optionM.series[0].data = []
         this.optionP.series[0].data = []
         this.optionM.xAxis.data = []

@@ -26,12 +26,12 @@
 </template>
 
 <script>
-const baseurl = 'http://119.3.166.63:9000/html/map'
+const baseurl = 'http://127.0.0.1:9000/html/map'
 export default {
   name: 'LocationQuery',
   data: function() {
     return {
-      query: 'http://119.3.166.63:9000/html/map',
+      query: 'http://127.0.0.1:9000/html/map',
       input: ''
     }
   },

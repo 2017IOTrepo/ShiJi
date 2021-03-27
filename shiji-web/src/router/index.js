@@ -75,7 +75,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'http://119.3.166.63:8081',
+        path: 'http://127.0.0.1:8081',
         meta: {
           title: '古籍阅读',
           icon: 'excel'
