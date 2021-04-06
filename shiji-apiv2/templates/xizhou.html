@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="/static/echarts.js"></script>
+<script type="text/javascript" src="/static/dataTool.js"></script>
+<script type="text/javascript" src="/static/china.js"></script>
+<script type="text/javascript" src="/static/world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=litwTUbYUu77A3O8dTIZU5zBvCNnM58h"></script>
+<script type="text/javascript" src="/static/bmap.js"></script>
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+
+
+function renderItem(params, api) {
+    var coords = [
+    [
+              107.314453125,
+              33.7243396617476
+            ],
+            [
+              107.99560546875,
+              32.7872745269555
+            ],
+            [
+              109.66552734375,
+              32.175612478499325
+            ],
+            [
+              110.93994140625,
+              31.98944183792288
+            ],
+            [
+              111.4453125,
+              32.2313896627376
+            ],
+            [
+              111.55517578125,
+              32.509761735919426
+            ],
+            [
+              111.95068359374999,
+              32.54681317351514
+            ],
+            [
+              113.35693359375,
+              32.24997445586331
+            ],
+            [
+              114.58740234375,
+              32.47269502206151
+            ],
+            [
+              115.42236328124999,
+              32.7503226078097
+            ],
+            [
+              115.48828125000001,
+              33.211116472416855
+            ],
+            [
+              115.6201171875,
+              33.797408767572485
+            ],
+            [
+              116.49902343749999,
+              33.94335994657882
+            ],
+            [
+              117.46582031249999,
+              34.50655662164561
+            ],
+            [
+              117.88330078125,
+              35.11990857099681
+            ],
+            [
+              119.11376953125,
+              35.496456056584165
+            ],
+            [
+              119.77294921874999,
+              35.94243575255426
+            ],
+            [
+              119.64111328125,
+              36.70365959719456
+            ],
+            [
+              119.0478515625,
+              36.89719446989036
+            ],
+            [
+              118.125,
+              37.142803443716836
+            ],
+            [
+              117.18017578125,
+              37.77071473849609
+            ],
+            [
+              117.09228515624999,
+              38.46219172306828
+            ],
+            [
+              117.53173828125,
+              39.26628442213066
+            ],
+            [
+              118.19091796875,
+              39.80853604144591
+            ],
+            [
+              117.50976562499999,
+              40.6306300839918
+            ],
+            [
+              116.08154296875001,
+              41.27780646738183
+            ],
+            [
+              114.873046875,
+              41.178653972331674
+            ],
+            [
+              113.57666015625,
+              39.99395569397331
+            ],
+            [
+              112.65380859375,
+              39.62261494094297
+            ],
+            [
+              112.12646484375,
+              39.01064750994083
+            ],
+            [
+              112.21435546875,
+              38.22091976683121
+            ],
+            [
+              111.64306640625,
+              36.491973470593685
+            ],
+            [
+              111.90673828125,
+              35.94243575255426
+            ],
+            [
+              110.74218749999999,
+              34.813803317113155
+            ],
+            [
+              109.3359375,
+              35.53222622770337
+            ],
+            [
+              107.75390625,
+              35.460669951495305
+            ],
+            [
+              107.314453125,
+              33.7243396617476
+            ]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+        points.push(api.coord(coords[i]));
+    }
+    var color = api.visual('color');
+
+    return {
+        type: 'polygon',
+        shape: {
+            points: echarts.graphic.clipPointsByRect(points, {
+                x: params.coordSys.x,
+                y: params.coordSys.y,
+                width: params.coordSys.width,
+                height: params.coordSys.height
+            })
+        },
+        style: api.style({
+            fill: color,
+            stroke: echarts.color.lift(color)
+        })
+    };
+}
+
+
+option = {
+    backgroundColor: 'transparent',
+    title: {
+        text: '西周地图',
+        left: 'center',
+        textStyle: {
+            color: '#000'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    bmap: {
+        center: [104.114129, 37.550339],
+        zoom: 5,
+        roam: true,
+        mapStyle: {
+            styleJson: [
+                    {
+                        "featureType": "water",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#6699CC"
+                        }
+                    },
+                    {
+                        "featureType": "land",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#DDDDDD"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#064f85"
+                        }
+                    },
+                    {
+                        "featureType": "railway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "highway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry",
+                        "stylers": {
+                            "color": "#004981"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#00508b"
+                        }
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "green",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#056197",
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "subway",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "manmade",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "local",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "arterial",
+                        "elementType": "labels",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    },
+                    {
+                        "featureType": "boundary",
+                        "elementType": "geometry.fill",
+                        "stylers": {
+                            "color": "#029fd4"
+                        }
+                    },
+                    {
+                        "featureType": "building",
+                        "elementType": "all",
+                        "stylers": {
+                            "color": "#1a5787"
+                        }
+                    },
+                    {
+                        "featureType": "label",
+                        "elementType": "all",
+                        "stylers": {
+                            "visibility": "off"
+                        }
+                    }
+            ]
+        }
+    },
+    series : [  
+        {
+            type: 'custom',
+            coordinateSystem: 'bmap',
+            renderItem: renderItem,
+            itemStyle: {
+                normal: {
+                  color: '#FFC299',
+                    opacity: 0.5
+                }
+            },
+            animation: false,
+            silent: true,
+            data: [0],
+            z: -100
+        },
+    ]
+};
+
+
+myChart.setOption(option);
+// 获取百度地图实例，使用百度地图自带的控件
+var bmap = myChart.getModel().getComponent('bmap').getBMap();
+
+
+bmap.addControl(new BMap.MapTypeControl());
+
+//调用百度的方法，使用bmap对象
+	var point = new BMap.Point(106.404, 39.915);
+	bmap.centerAndZoom(point, 1);
+
+var point1 = new BMap.Point(110.404, 35.915);
+  var opts = {
+      position: point1,    // 指定文本标注所在的地理位置
+      offset: new BMap.Size(0, 0),    //设置文本偏移量
+  }
+  var label = new BMap.Label("西周", opts, {
+    offset: new BMap.Size(0, 0)
+  });  // 创建文本标注对象
+label.setStyle({
+    color: "rad",
+    backgroundColor: 'transparent',//文本背景色
+    borderColor: 'transparent',//文本框边框色
+    fontSize: "19px",
+    height: "20px",
+    lineHeight: "20px",
+    fontFamily: "微软雅黑"
+});
+bmap.addOverlay(label);
+
+</script>
+</body>
+</html>

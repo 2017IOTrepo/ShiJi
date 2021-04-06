@@ -10,8 +10,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
-html, body {
+<style>
+html, body, #app {
   width: 100%;
   height: 100%;
 }
