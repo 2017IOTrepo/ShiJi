@@ -35,6 +35,7 @@ jobs:
             ${{ runner.OS }}-
       - name: Web
         run: |
+          npm install -g @vue/cli
           npm install
           npm run build:prod
         working-directory: ./shiji-web
@@ -42,7 +43,6 @@ jobs:
         run: |
           npm config set electron_mirror http://npm.taobao.org/mirrors/electron/
           npm config set electron_custom_dir "7.3.0"
-          npm install -g @vue/cli
           npm install && npm run build
         working-directory: ./shiji-web
       - name: zip web_build
