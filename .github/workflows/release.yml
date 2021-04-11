@@ -41,8 +41,6 @@ jobs:
         working-directory: ./shiji-web
       - name: Web reader
         run: |
-          npm config set electron_mirror http://npm.taobao.org/mirrors/electron/
-          npm config set electron_custom_dir "7.3.0"
           npm install && npm run build
         working-directory: ./shiji-book-reader-web
       - name: zip web_build
