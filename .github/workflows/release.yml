@@ -1,0 +1,61 @@
+# main.yml
+
+# 工作流程的名字
+name: Build release
+
+# 工作流程触发的时机，这里是当一个版本标签推送到仓库时触发
+on:
+  push:
+    tags:
+      - v*
+
+# 这个工作流程需要执行的任务
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      # 拉取项目代码
+      - uses: actions/checkout@v2
+      # from: https://github.com/actions/setup-node
+      - name: Setup Node.js 12.x
+        uses: actions/setup-node@master
+        with:
+          node-version: "12.x"
+      # Cache node_modules
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: runner.os−node−{{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            runner.OS−build−{{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
+      - name: Web
+        run: |
+          npm install
+          npm run build:prod
+        working-directory: ./shiji-web
+      - name: Web reader
+        run: |
+          npm config set electron_mirror http://npm.taobao.org/mirrors/electron/
+          npm config set electron_custom_dir "7.3.0"
+          npm install -g @vue/cli
+          npm install && npm run build
+        working-directory: ./shiji-web
+      - name: zip web_build
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r web_shiji_build.zip ./shiji-web/dist
+      - name: zip web_book_reader_build
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r web_book_reader_build.zip ./shiji-book-reader-web/dist
+      # 发布到 Release
+      - name: Release Dist
+        uses: ncipollo/release-action@v1.5.0
+        with:
+          artifacts: "./web_book_reader_build.zip,./web_shiji_build.zip"
+          token: ${{ secrets.DEPLOY_KEY }}
